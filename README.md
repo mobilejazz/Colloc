@@ -7,6 +7,16 @@ Basically, you can define all the localization strings of your project in a user
 
 Then, by runing a script you can export all the strings for all languages to iOS and/or Android format.
 
+## Instalation
+
+There is only one file needed: the `colloc.php` file. Therefore the options are:
+
+- Download the `colloc.php` file manually and add it to your project.
+- Use the Cocoa Pod to get the file:
+```
+pod 'Colloc', :git => 'https://github.com/mobilejazz/Colloc.git'
+```
+
 ## 1. Defining the Google Spreadsheet
 
 Create a new Google spreadsheet document and configure it as follows:
