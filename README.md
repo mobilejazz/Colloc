@@ -3,7 +3,7 @@ Colloc is a collaborative platform to manage the localizations for iOS and Andro
 
 Basically, you can define all the localization strings of your project in a user-friendly google spreadsheet document as it is shown in the image.
 
-![alt tag](images/google_spreadsheet_sample.png)
+![alt tag](images/sample_gspreadsheet.png)
 
 Then, by runing a script you can export all the strings for all languages to iOS and/or Android format.
 
