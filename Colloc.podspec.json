@@ -17,6 +17,6 @@
     "tag": "0.1.0"
   },
   "source_files": [
-    "colloc.php",
-  ],
+    "colloc.php"
+  ]
 }
