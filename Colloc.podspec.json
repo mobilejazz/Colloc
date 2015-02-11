@@ -1,6 +1,6 @@
 {
   "name": "Colloc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "summary": "Collaborative Localizations for iOS and Android using Google Documents",
   "description": "Use Goolge drive to define your localization strings and export them to iOS or Android with Colloc, that simple.",
   "homepage": "https://github.com/mobilejazz/Colloc",
@@ -14,7 +14,7 @@
   "social_media_url": "http://twitter.com/mobilejazzcat",
   "source": {
     "git": "https://github.com/mobilejazz/Colloc.git",
-    "tag": "0.1.0"
+    "tag": "0.1.1"
   },
   "source_files": [
     "colloc.php"

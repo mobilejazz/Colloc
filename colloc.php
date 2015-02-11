@@ -129,8 +129,10 @@ if (count($localizationFileLines) > 0)
 
         foreach ($languages as $lang)
         {
-          $iOSFiles[$lang][] = $iOSParsedComment;
-          $androidFiles[$lang][] = $androidParsedComment;
+			if($lang != '#') {
+          	  $iOSFiles[$lang][] = $iOSParsedComment;
+        	  $androidFiles[$lang][] = $androidParsedComment;
+	  		}
         }
       }
     }
@@ -267,7 +269,7 @@ function writeIOSFiles($files, $destPath)
     }
     else
     {
-      $directory = $languageName;
+      $directory = $languageName.".lproj";
     }
 
     $filename = $iOSPath."/".$directory."/Localizable.strings";
