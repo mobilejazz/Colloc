@@ -15,6 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+    
+function stringStartsWith($haystack, $needle) {
+    // search backwards starting from haystack length characters from the end
+    return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
+}
 
 $url = $argv[1];
 
@@ -90,7 +95,7 @@ if (count($localizationFileLines) > 0)
     }
     else
     {
-      $lineIsAComment = count($values) == 0;
+      $lineIsAComment = count($values) == 0 || stringStartsWith($key, '#');
       // if key contains spaces is considered a comment
       $keyContainsWhitespaces = strpos($key,' ');
       $merged_values = implode("", $values);
