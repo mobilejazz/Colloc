@@ -33,7 +33,7 @@ $destPath = "";
 
 $width = shell_exec('tput cols');
 if(!$width) {$width = 80;}
-$outputDivider = str_repeat('-',$width);
+$outputDivider = str_repeat('-',(int)$width);
 
 echo $outputDivider."\n";
 
@@ -83,15 +83,20 @@ if (count($localizationFileLines) > 0)
     {
       continue;
     }
+    
 
     $fields = explode("\t", $line);
+    foreach ($fields as $k => $v)
+      $fields[$k] = trim(preg_replace('/\s+/', ' ', $v));
+
 
     $key = $fields[0];
     $values = array_slice($fields, 1);
 
     if ($i == 0)
     {
-      $languages = $values;
+        $languages = $values;
+        //var_dump($languages);
     }
     else
     {
@@ -103,7 +108,7 @@ if (count($localizationFileLines) > 0)
       if (!$lineIsAComment && !$keyContainsWhitespaces && strlen($key) > 0 && strlen($merged_values) > 0) // It's not a comment and it's not empty
       {
 
-        echo $key,',';
+        //echo $key,',';
         $lines++;
 
         $languageIndex = 0;
@@ -134,10 +139,10 @@ if (count($localizationFileLines) > 0)
 
         foreach ($languages as $lang)
         {
-			if($lang != '#') {
-          	  $iOSFiles[$lang][] = $iOSParsedComment;
-        	  $androidFiles[$lang][] = $androidParsedComment;
-	  		}
+      if($lang != '#') {
+              $iOSFiles[$lang][] = $iOSParsedComment;
+            $androidFiles[$lang][] = $androidParsedComment;
+        }
         }
       }
     }
@@ -176,15 +181,15 @@ function iOSLineParse($key, $localizedString)
 $occurencesCounter = 0;
 function androidLineParse($key, $localizedString)
 {
-	// replace iOS string occurence to android format
+  // replace iOS string occurence to android format
   $localizedString = str_replace("%@", "%s", $localizedString);
   // if the string starts with @, escapes it: \@
-	$localizedString = preg_replace("/^(@)/", "\\@", $localizedString);
+  $localizedString = preg_replace("/^(@)/", "\\@", $localizedString);
 
-	// replace multiple arguments to android format. Example:
-	// 	input: %s te ha enviado %s minuto de felicidad
-	// 	output: %1$s te ha enviado %2$s minuto de felicidad
-	resetOccurencesCounter();
+  // replace multiple arguments to android format. Example:
+  //  input: %s te ha enviado %s minuto de felicidad
+  //  output: %1$s te ha enviado %2$s minuto de felicidad
+  resetOccurencesCounter();
   $localizedString = preg_replace_callback("/%([\.a-z])/", "replaceArgumentsIntoAndroidFormat", $localizedString);
 
   $localizedString = str_replace("'", "\'", $localizedString);
@@ -198,7 +203,7 @@ function androidLineParse($key, $localizedString)
 
 function resetOccurencesCounter()
 {
-	global $occurencesCounter;
+  global $occurencesCounter;
   $occurencesCounter = 0;
 }
 
@@ -221,7 +226,7 @@ function androidCommentParse($comment)
 function writeIOSFiles($files, $destPath)
 {
     $iOSPath = $destPath;
-
+    
     $CatPath = "ca.lproj";
     $EnglishPath = "en.lproj";
     $SpanishPath = "es.lproj";
@@ -317,12 +322,12 @@ function writeAndroidFiles($files,$destPath)
 
   foreach ($files as $languageName => $lines)
   {
-  	$languageCode = convertLanguageToISO639($languageName);
+    $languageCode = convertLanguageToISO639($languageName);
     if (!$languageCode)
     {
       continue;
     }
-  	$filenameLanguageCode = $languageCode == "en" ? "" : "-".$languageCode;
+    $filenameLanguageCode = $languageCode == "en" ? "" : "-".$languageCode;
     $filename = $androidPath.$filenameLanguageCode."/strings.xml";
     echo("ANDR - Trying to Write:\n".$filename."\n");
     createPathIfDoesntExists($filename);
@@ -384,17 +389,26 @@ function createPathIfDoesntExists($filename)
     }
 }
 
-function convertLanguageToISO639($language) {
+function convertLanguageToISO639($language)
+{
+    $languages['Catalan'] = "ca";
+    $languages['English'] = "en";
+    $languages['Spanish'] = "es";
+    $languages['German'] = "de";
+    $languages['French'] = "fr";
+    $languages['Italian'] = "it";
+    $languages['Portuguese'] = "pt";
+    $languages['Dutch'] = "nl";
+    $languages['Swedish'] = "sv";
 
-  $languages['Catalan'] = "ca";
-  $languages['English'] = "en";
-  $languages['Spanish'] = "es";
-  $languages['German'] = "de";
-  $languages['French'] = "fr";
-  $languages['Italian'] = "it";
-  $languages['Portuguese'] = "pt";
-  $languages['Dutch'] = "nl";
-  $languages['Swedish'] = "sv";
-
-  return $languages[$language];
+    
+    if (isset($languages[$language]))
+    {
+        echo "\nLANG: ".$language . "[".$languages[$language]."]";
+        return $languages[$language];
+    }
+    
+    echo "\nLanguage not found: ".$language;
+    
+    return "not_found";
 }
