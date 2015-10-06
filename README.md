@@ -82,7 +82,11 @@ Also, **Colloc** will generate an auto-generated `Localization.h` file that incl
 #define <my_key> NSLocalizedString(@"my_key",nil)
 ```
 
-Import this file in your `.pch` project file. This way, you can easily use your localized strings and Xcode will even provide autocompletion when using them.
+Import this file in your `.pch` project file. This way, you can easily use your localized strings. Otherwise, import the file in your preferred classes.
+
+Becasue we are generating `#define` statements, Xcode will  provide autocompletion when using them:
+
+![](images/xcode_autocompletion.png)
 
 For a easier usage, create a new Target in your Xcode project with the script above as a build phase. Then just by runing the schema corresponding to that target you will be able to update the localization files from the spreadsheet values.
 
