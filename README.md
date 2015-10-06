@@ -21,11 +21,37 @@ pod 'Colloc', :git => 'https://github.com/mobilejazz/Colloc.git'
 
 Create a new Google spreadsheet document and configure it as follows:
 
-1. In the first row, add the word "key" at the column A and the symbol "#" at the column B.
-2. Then, for each language you want to suport ad the name of it on each consequtive column (always at row 1). For example, add "English" at column C and "Spanish" at column D.
+1. The first column is used to store the keys of your strings. Keys must have only characters `A-Z`, `a-z`, `0-9` and `_`. Using any other character spaces or `-` may result in a building failure in your project. 
+2. The first row of the first column must contain the title `Key` to indicate to the script that column contains keys.
+2. For each language you want to support, fill a new column with its translations.
+3. Use the first row of a language-column to indicate the name of language: English, Spanish, etc. 
+4. Adding the char `#` in the first row of a column will indicate the script to ignore that column. Use this to add "comments" columns, "char counts" columns, etc.
+5. Adding the char `#` as the first character of the first column of a row will indicate the script to ignore that row. Use this to ignore a specific key with its translations.
+6. The `#` char can be used inside translations.
+7. To add placeholders in your strings (for adding in runtime numbers, strings, ...) use the conventions listed in the table below. Colloc will take care to convert them to the platform-specific (iOS/Android) standard.
 
-Now you can start adding the keys on the column "key" (column A) and all transaltions on the correpsonding cells. Do not add any text on the column "#" (column B).
+| Type            | Colloc | Example Key             | Example Translation              |
+|-----------------|--------|-------------------------|----------------------------------|
+| string          | %@     | ls_user_name            | My username is %@                |
+| integer         | %d     | ls_user_age             | My age is %ld                    |
+| float           | %f     | ls_city_distance_meters | The city is %fm away             |
+| float precision | %.2f   | ls_number_two_decimals  | A number with two decimals: %.2f |
 
+8. Currently, Colloc only supports the following languages:
+
+| Language   | ISO639 |
+|------------|--------|
+| English    | en     |
+| Spanish    | es     |
+| Catalan    | ca     |
+| German     | de     |
+| French     | fr     |
+| Italian    | it     |
+| Portuguese | pt     |
+| Dutch      | nl     |
+| Swedish    | sv     |
+
+To use colloc with a different language, just use in the first row of the language-column the ISO639 language code (colloc translates the Language name to the ISO630 if available, otherwise uses the available language name as the language code).
 
 ## 2. Retrieving the Google Spreadsheet URL
 
@@ -33,7 +59,9 @@ The `colloc.php` script needs the Google spreadsheet exported as a `.tsv` file. 
 
 To get the exporting to `.tsv` URL just open the spreadsheet and select "File" > "Download as" > "Tab-spearated values (.tsv)". Your browser will download then the document. Then open the downloads manager and copy the download link from it.
 
-## 3. Exporting to iOS
+## 3. Exporting strings
+
+### 3.1. To iOS
 
 To export to iOS just create a new bash script and execute the `colloc.php` file with the appropiate arguments.
 
@@ -72,7 +100,9 @@ Also, **Colloc** will generate an auto-generated `Localization.h` file that incl
 
 Import this file in your `.pch` project file. This way, you can easily use your localized strings and Xcode will even provide autocompletion when using them.
 
-## 4. Exporting to Android
+For a easier usage, create a new Target in your Xcode project with the script above as a build phase. Then just by runing the schema corresponding to that target you will be able to update the localization files from the spreadsheet values.
+
+### 3.2. To Android
 
 To export to iOS just create a new bash script and execute the `colloc.php` file with the appropiate arguments.
 
@@ -100,6 +130,13 @@ exec "php" "$COLLOC_PATH" "$GDOC_PATH" "$OUTPUT_FOLDER_NAME" "$OUTPUT_TYPE"
 ```
 When executing this script it will generate the Android localization files for all languages. Just import them to your project and you are ready to go.
 
+### 3.3. Generic export
+
+If you want to export in both iOS and Android in the same script, you must set the `OUTPUT_TYPE` to `110`.
+
+```
+OUTPUT_TYPE="110" #110 for iOS and Android export
+```
 ---
 # License
 
