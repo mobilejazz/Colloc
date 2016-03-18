@@ -236,6 +236,12 @@ function writeIOSFiles($files, $destPath)
     $PortuguesePath = "pt.lproj";
     $DutchPath = "nl.lproj";
     $SwedishPath = "sv.lproj";
+    $ArabicPath ="ar.lproj";
+    $PolandPath ="pl.lproj";
+    $PortuguesePath ="pt.lproj";
+    $RussianPath ="ru.lproj";
+    $TurkishPath ="tr.lproj";
+    $ChinesePath ="zh.lproj";
 
   foreach ($files as $languageName => $lines)
   {
@@ -276,6 +282,30 @@ function writeIOSFiles($files, $destPath)
     else if($languageName == "Swedish")
     {
       $directory = $SwedishPath;
+    }
+    else if($languageName == "Arabic")
+    {
+      $directory = $ArabicPath;
+    }
+    else if($languageName == "Polish")
+    {
+      $directory = $PolandPath;
+    }
+    else if($languageName == "Portuguese")
+    {
+      $directory = $PortuguesePath;
+    }
+    else if($languageName == "Russian")
+    {
+      $directory = $RussianPath;
+    }
+    else if($languageName == "Turkish")
+    {
+      $directory = $TurkishPath;
+    }
+    else if($languageName == "Chinese")
+    {
+      $directory = $ChinesePath;
     }
     else
     {
@@ -400,7 +430,12 @@ function convertLanguageToISO639($language)
     $languages['Portuguese'] = "pt";
     $languages['Dutch'] = "nl";
     $languages['Swedish'] = "sv";
-
+    $languages['Arabic'] = "ar";
+    $languages['Polish'] = "pl";
+    $languages['Portuguese'] = "pt";
+    $languages['Russian'] = "ru";
+    $languages['Turkish'] = "tr";
+    $languages['Chinese'] = "zh";
     
     if (isset($languages[$language]))
     {
