@@ -21,6 +21,12 @@ function stringStartsWith($haystack, $needle) {
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
 }
 
+function file_get_contents_utf8($fn) {
+     $content = file_get_contents($fn);
+      return mb_convert_encoding($content, 'UTF-8',
+          mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
+}
+
 $url = $argv[1];
 
 $editUrl = str_replace('/pub?', '/ccc?', $url);
@@ -64,7 +70,7 @@ if (!$argv[3])
     $argv[3] = '111';
 }
 
-$localizationFileLines = file_get_contents($url);
+$localizationFileLines = file_get_contents_utf8($url);
 //var_dump($localizationFileLines);
 
 $localizationFileLines = explode("\n", $localizationFileLines);
@@ -86,9 +92,6 @@ if (count($localizationFileLines) > 0)
     
 
     $fields = explode("\t", $line);
-    foreach ($fields as $k => $v)
-      $fields[$k] = trim(preg_replace('/\s+/', ' ', $v));
-
 
     $key = $fields[0];
     $values = array_slice($fields, 1);
