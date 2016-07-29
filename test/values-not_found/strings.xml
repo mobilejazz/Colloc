@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--
+	This is an automatically generated file
+	Please don't modify it.
+	If you need to change some text please do so at
+	https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o
+	-->
+
+
+	<!---->
+
+	<string name="Generic"></string>
+
+	<string name="ls_generic_accept">1</string>
+
+	<string name="ls_generic_cancel">2</string>
+
+	<string name="ls_generic_quit">2</string>
+
+	<string name="ls_generic_yes">1</string>
+
+	<string name="ls_generic_no">1</string>
+
+	<string name="ls_generic_error">2</string>
+
+	<string name="ls_generic_app_name">5</string>
+
+	<string name="ls_generic_exit_app_warning">11</string>
+
+	<string name="ls_generic_error_wrong_device">8</string>
+
+	<string name="ls_generic_search_devices">4</string>
+
+	<string name="ls_generic_manual_connection">4</string>
+
+	<string name="ls_generic_version_name">2</string>
+
+	<string name="ls_generic_connections">2</string>
+
+	<string name="ls_generic_done">1</string>
+
+	<string name="ls_generic_loading">3</string>
+
+	<string name="ls_generic_demo_version">4</string>
+
+	<string name="ls_generic_biodynamic">4</string>
+
+	<string name="Errors"></string>
+
+	<string name="ls_error_generic_network">4</string>
+
+	<string name="ls_error_network_unreachable">13</string>
+
+	<string name="ls_error_network_device_unavailable">8</string>
+
+	<string name="ls_error_refresh_desktop">6</string>
+
+	<string name="ls_error_refresh_element_status">8</string>
+
+	<string name="ls_error_element_commute">12</string>
+
+	<string name="ls_error_refresh_element">10</string>
+
+	<string name="ls_error_value_invalid">9</string>
+
+	<string name="ls_error_name_empty">6</string>
+
+
+	<!--Connection edit-->
+
+	<string name="ls_connection_edit_remove_confirm">10</string>
+
+
+	<!--Element list-->
+
+	<string name="ls_element_list_refresh_age">3</string>
+
+	<string name="le_element_list_no_element">4</string>
+
+	<string name="ls_element_list_force_refresh">2</string>
+
+	<string name="Refresh"></string>
+
+	<string name="ls_refresh_title">3</string>
+
+	<string name="Settings"></string>
+
+	<string name="ls_settings_title">2</string>
+
+	<string name="ls_settings_reset_defaults">5</string>
+
+	<string name="Loading"></string>
+
+	<string name="ls_loading_title">6</string>
+
+	<string name="ls_loading_message">26</string>
+
+
+	<!--Manual Connection-->
+
+	<string name="ls_manual_connection">4</string>
+
+	<string name="ls_manual_connection_ip">4</string>
+
+	<string name="ls_manual_connection_port">2</string>
+
+	<string name="ls_manual_connection_exit">2</string>
+
+	<string name="ls_manual_connection_connect">1</string>
+
+	<string name="Connections"></string>
+
+	<string name="ls_connections_title"></string>
+
+	<string name="ls_connections_add">2</string>
+
+	<string name="ls_connections_remove">2</string>
+
+	<string name="ls_connections_edit">2</string>
+
+	<string name="ls_connections_device_list">4</string>
+
+	<string name="ls_connection_detail_local">2</string>
+
+	<string name="ls_connection_detail_remote">2</string>
+
+
+	<!--Devices not found-->
+
+	<string name="ls_devices_not_found_title">10</string>
+
+	<string name="ls_devices_not_found_repeat_scan">6</string>
+
+	<string name="ls_devices_not_found_manual_connection">4</string>
+
+	<string name="ls_devices_not_found_demo"></string>
+
+
+	<!--Connection error-->
+
+	<string name="ls_connect_error_title">4</string>
+
+	<string name="ls_connect_error_message">12</string>
+
+	<string name="ls_connect_error_retry"></string>
+
+
+	<!--Element detail-->
+
+	<string name="ls_element_detail_title_temperature">2</string>
+
+	<string name="ls_element_detail_title_saturation">3</string>
+
+	<string name="ls_element_detail_title_hue">2</string>
+
+	<string name="ls_element_detail_title_intensity">2</string>
+
+	<string name="ls_element_detail_title_locker">4</string>
+
+	<string name="ls_element_detail_title_lux">3</string>
+
+	<string name="ls_element_detail_title_speed">2</string>
+
+	<string name="ls_element_detail_error">7</string>
+
+
+	<!--Demo elements-->
+
+	<string name="ls_elem_welcome">2</string>
+
+	<string name="ls_elem_color_rgb">5</string>
+
+	<string name="ls_elem_meeting_room">2</string>
+
+	<string name="ls_elem_projection">2</string>
+
+	<string name="ls_elem_terrace">2</string>
+
+	<string name="ls_elem_circadian">4</string>
+
+	<string name="ls_elem_general_lighting">4</string>
+
+	<string name="ls_elem_working_hours">4</string>
+
+	<string name="ls_elem_tendal_terrace">4</string>
+
+	<string name="ls_elem_reception_light">3</string>
+
+
+	<!--Updates date string-->
+
+	<string name="ls_single_second">2</string>
+
+	<string name="ls_seconds">1</string>
+
+	<string name="ls_single_minute">3</string>
+
+	<string name="ls_minutes">2</string>
+
+	<string name="ls_single_hour">3</string>
+
+	<string name="ls_hours">2</string>
+
+	<string name="ls_single_day">2</string>
+
+	<string name="ls_days">1</string>
+
+	<string name="New"></string>
+
+
+	<!---->
+
+
+	<!---->
+
+
+	<!---->
+
+
+</resources>

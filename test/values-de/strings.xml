@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--
+	This is an automatically generated file
+	Please don't modify it.
+	If you need to change some text please do so at
+	https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o
+	-->
+
+
+	<!---->
+
+	<string name="Generic"></string>
+
+	<string name="ls_generic_accept">Ok</string>
+
+	<string name="ls_generic_cancel">Stornieren</string>
+
+	<string name="ls_generic_quit">Verlassen</string>
+
+	<string name="ls_generic_yes">Ja</string>
+
+	<string name="ls_generic_no">Keine</string>
+
+	<string name="ls_generic_error">Fehler</string>
+
+	<string name="ls_generic_app_name">Scena</string>
+
+	<string name="ls_generic_exit_app_warning">Sind Sie sicher, um die Anwendung zu beenden?</string>
+
+	<string name="ls_generic_error_wrong_device">Falsche IP oder Port</string>
+
+	<string name="ls_generic_search_devices">Nach Geräten suchen</string>
+
+	<string name="ls_generic_manual_connection">Die manuelle Konfiguration</string>
+
+	<string name="ls_generic_version_name">Version</string>
+
+	<string name="ls_generic_connections">Anschlüsse</string>
+
+	<string name="ls_generic_done">Erledigt</string>
+
+	<string name="ls_generic_loading">Lädt</string>
+
+	<string name="ls_generic_demo_version">Demo Version</string>
+
+	<string name="ls_generic_biodynamic">Biodynamische</string>
+
+	<string name="Errors"></string>
+
+	<string name="ls_error_generic_network">Netzwerkfehler</string>
+
+	<string name="ls_error_network_unreachable">Kann nicht mit dem Netzwerk verbinden. Bitte überprüfen Sie die Verbindung</string>
+
+	<string name="ls_error_network_device_unavailable">Das eigentliche Gerät ist nicht verfügbar</string>
+
+	<string name="ls_error_refresh_desktop">Geräte-Update-Fehler</string>
+
+	<string name="ls_error_refresh_element_status">Gerätezustand Update-Fehler</string>
+
+	<string name="ls_error_element_commute">Fehler beim Element Zustandsänderung</string>
+
+	<string name="ls_error_refresh_element">Fehler bei der Element-Update</string>
+
+	<string name="ls_error_value_invalid">Bitte geben Sie eine gültige Wert</string>
+
+	<string name="ls_error_name_empty">Name ist erforderlich</string>
+
+
+	<!--Connection edit-->
+
+	<string name="ls_connection_edit_remove_confirm">Sind Sie sicher, dass Sie die Verbindung zu löschen?</string>
+
+
+	<!--Element list-->
+
+	<string name="ls_element_list_refresh_age">Vor synchronisiert</string>
+
+	<string name="le_element_list_no_element">Keine Elemente</string>
+
+	<string name="ls_element_list_force_refresh">Aktualisieren</string>
+
+	<string name="Refresh"></string>
+
+	<string name="ls_refresh_title">LÄDT NEU</string>
+
+	<string name="Settings"></string>
+
+	<string name="ls_settings_title">ANPASSUNGEN</string>
+
+	<string name="ls_settings_reset_defaults">Reset</string>
+
+	<string name="Loading"></string>
+
+	<string name="ls_loading_title">GERÄTE WERDEN\nGESUCHT</string>
+
+	<string name="ls_loading_message">Erinnern Sie sich daran, dass Sie\nfür die Synchronisierung mit Scena mit dem gleichen Netz\nverbunden sein müssen</string>
+
+
+	<!--Manual Connection-->
+
+	<string name="ls_manual_connection">Manuelle Verbindung</string>
+
+	<string name="ls_manual_connection_ip">IP Adresse</string>
+
+	<string name="ls_manual_connection_port">Port</string>
+
+	<string name="ls_manual_connection_exit">VERLASSEN</string>
+
+	<string name="ls_manual_connection_connect">Verbinden</string>
+
+	<string name="Connections"></string>
+
+	<string name="ls_connections_title">Anschlüsse</string>
+
+	<string name="ls_connections_add">Hinzufügen</string>
+
+	<string name="ls_connections_remove">Entfernen</string>
+
+	<string name="ls_connections_edit">Bearbeiten</string>
+
+	<string name="ls_connections_device_list">Geräteliste</string>
+
+	<string name="ls_connection_detail_local">lokal</string>
+
+	<string name="ls_connection_detail_remote">entfernt</string>
+
+
+	<!--Devices not found-->
+
+	<string name="ls_devices_not_found_title">GERÄT SCENA\nNICHT GEFUNDEN</string>
+
+	<string name="ls_devices_not_found_repeat_scan">Netz noch einmal scannen</string>
+
+	<string name="ls_devices_not_found_manual_connection">Manuelle Konfiguration</string>
+
+	<string name="ls_devices_not_found_demo">Demo mode</string>
+
+
+	<!--Connection error-->
+
+	<string name="ls_connect_error_title">VERBINDUNG\nNCIHT MÖGLICH</string>
+
+	<string name="ls_connect_error_message">Verbinden Sie sich mit einem\nNetz um Scena zu synchronisieren</string>
+
+	<string name="ls_connect_error_retry">Retry</string>
+
+
+	<!--Element detail-->
+
+	<string name="ls_element_detail_title_temperature">Temperatur</string>
+
+	<string name="ls_element_detail_title_saturation">Sättigung</string>
+
+	<string name="ls_element_detail_title_hue">Ton</string>
+
+	<string name="ls_element_detail_title_intensity">Intensität</string>
+
+	<string name="ls_element_detail_title_locker">Parole</string>
+
+	<string name="ls_element_detail_title_lux">Lux</string>
+
+	<string name="ls_element_detail_title_speed">Geschwindigkeit</string>
+
+	<string name="ls_element_detail_error">Fehler im eigentlichen Element</string>
+
+
+	<!--Demo elements-->
+
+	<string name="ls_elem_welcome">Willkommem</string>
+
+	<string name="ls_elem_color_rgb">RGB-Farben-</string>
+
+	<string name="ls_elem_meeting_room">Termin</string>
+
+	<string name="ls_elem_projection">Proyektion</string>
+
+	<string name="ls_elem_terrace">Terrasse</string>
+
+	<string name="ls_elem_circadian">Ziekadianen Zyklus</string>
+
+	<string name="ls_elem_general_lighting">Aligemeinbeleuchtung</string>
+
+	<string name="ls_elem_working_hours">Arbeitszeit</string>
+
+	<string name="ls_elem_tendal_terrace">Terrassenüberdachung</string>
+
+	<string name="ls_elem_reception_light">Rezeption Licht</string>
+
+
+	<!--Updates date string-->
+
+	<string name="ls_single_second">1 Sekunde</string>
+
+	<string name="ls_seconds">Sekunden</string>
+
+	<string name="ls_single_minute">1 Minute</string>
+
+	<string name="ls_minutes">Minuten</string>
+
+	<string name="ls_single_hour">1 stunde</string>
+
+	<string name="ls_hours">stunden</string>
+
+	<string name="ls_single_day">1 tag</string>
+
+	<string name="ls_days">tage</string>
+
+	<string name="New"></string>
+
+
+	<!---->
+
+
+	<!---->
+
+
+	<!---->
+
+
+</resources>

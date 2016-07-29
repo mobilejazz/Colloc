@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--
+	This is an automatically generated file
+	Please don't modify it.
+	If you need to change some text please do so at
+	https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o
+	-->
+
+
+	<!---->
+
+	<string name="Generic"></string>
+
+	<string name="ls_generic_accept">ОК</string>
+
+	<string name="ls_generic_cancel">Отмена</string>
+
+	<string name="ls_generic_quit">Уволиться</string>
+
+	<string name="ls_generic_yes">да</string>
+
+	<string name="ls_generic_no">нет</string>
+
+	<string name="ls_generic_error">ошибка</string>
+
+	<string name="ls_generic_app_name">Scena</string>
+
+	<string name="ls_generic_exit_app_warning">Вы уверены, что хотите выйти из приложения?</string>
+
+	<string name="ls_generic_error_wrong_device">Неправильный IP или порт</string>
+
+	<string name="ls_generic_search_devices">Искать устройства</string>
+
+	<string name="ls_generic_manual_connection">Ручная настройка</string>
+
+	<string name="ls_generic_version_name">Версия</string>
+
+	<string name="ls_generic_connections">связи</string>
+
+	<string name="ls_generic_done">Готово</string>
+
+	<string name="ls_generic_loading">Загружается</string>
+
+	<string name="ls_generic_demo_version">Демо-версии</string>
+
+	<string name="ls_generic_biodynamic">Biodynamic</string>
+
+	<string name="Errors"></string>
+
+	<string name="ls_error_generic_network">Ошибка сети</string>
+
+	<string name="ls_error_network_unreachable">Не удается подключиться к сети. Пожалуйста, проверьте подключение</string>
+
+	<string name="ls_error_network_device_unavailable">Фактическое устройство недоступно</string>
+
+	<string name="ls_error_refresh_desktop">Ошибка обновления устройства</string>
+
+	<string name="ls_error_refresh_element_status">Ошибка обновления состояния устройства</string>
+
+	<string name="ls_error_element_commute">Ошибка при изменении состояния элемента</string>
+
+	<string name="ls_error_refresh_element">Ошибка при обновлении элемента</string>
+
+	<string name="ls_error_value_invalid">Пожалуйста, введите действительное значение</string>
+
+	<string name="ls_error_name_empty">Имя требуется</string>
+
+
+	<!--Connection edit-->
+
+	<string name="ls_connection_edit_remove_confirm">Вы уверены, что хотите удалить соединение?</string>
+
+
+	<!--Element list-->
+
+	<string name="ls_element_list_refresh_age">Синхронное назад</string>
+
+	<string name="le_element_list_no_element">Нет элементов</string>
+
+	<string name="ls_element_list_force_refresh">Обновить</string>
+
+	<string name="Refresh"></string>
+
+	<string name="ls_refresh_title">Обновляется</string>
+
+	<string name="Settings"></string>
+
+	<string name="ls_settings_title">НАСТРОЙКИ</string>
+
+	<string name="ls_settings_reset_defaults">По умолчанию Сброс</string>
+
+	<string name="Loading"></string>
+
+	<string name="ls_loading_title">Поиск новых\nустройств</string>
+
+	<string name="ls_loading_message">Помните, для синхронизации с Scena,\nвы должны быть подключены к той же сети</string>
+
+
+	<!--Manual Connection-->
+
+	<string name="ls_manual_connection">Ручное подключение</string>
+
+	<string name="ls_manual_connection_ip">айпи адрес</string>
+
+	<string name="ls_manual_connection_port">порт</string>
+
+	<string name="ls_manual_connection_exit">ВЫЙТИ</string>
+
+	<string name="ls_manual_connection_connect">Подключить</string>
+
+	<string name="Connections"></string>
+
+	<string name="ls_connections_title">связи</string>
+
+	<string name="ls_connections_add">добавлять</string>
+
+	<string name="ls_connections_remove">удалять</string>
+
+	<string name="ls_connections_edit">редактировать</string>
+
+	<string name="ls_connections_device_list">Список устройств</string>
+
+	<string name="ls_connection_detail_local">Местный</string>
+
+	<string name="ls_connection_detail_remote">дистанционный пульт</string>
+
+
+	<!--Devices not found-->
+
+	<string name="ls_devices_not_found_title">Устройство SCENA\nне найдено</string>
+
+	<string name="ls_devices_not_found_repeat_scan">Сканировать сеть повторно</string>
+
+	<string name="ls_devices_not_found_manual_connection">Ручная настройка</string>
+
+	<string name="ls_devices_not_found_demo">Demo mode</string>
+
+
+	<!--Connection error-->
+
+	<string name="ls_connect_error_title">POŁĄCZENIE\nNIEDOSTĘPNE</string>
+
+	<string name="ls_connect_error_message">подключитесь к сети, чтобы\nсинхронизировать с Scena</string>
+
+	<string name="ls_connect_error_retry">Retry</string>
+
+
+	<!--Element detail-->
+
+	<string name="ls_element_detail_title_temperature">Температура</string>
+
+	<string name="ls_element_detail_title_saturation">Насыщение</string>
+
+	<string name="ls_element_detail_title_hue">Тон</string>
+
+	<string name="ls_element_detail_title_intensity">Интенсивность</string>
+
+	<string name="ls_element_detail_title_locker">Пароль</string>
+
+	<string name="ls_element_detail_title_lux">Lux</string>
+
+	<string name="ls_element_detail_title_speed">Скорость</string>
+
+	<string name="ls_element_detail_error">Ошибка в фактическом элементе</string>
+
+
+	<!--Demo elements-->
+
+	<string name="ls_elem_welcome">Милости Просим</string>
+
+	<string name="ls_elem_color_rgb">RGB Color</string>
+
+	<string name="ls_elem_meeting_room">встреча</string>
+
+	<string name="ls_elem_projection">проекция</string>
+
+	<string name="ls_elem_terrace">терраса</string>
+
+	<string name="ls_elem_circadian">Суточный цикл</string>
+
+	<string name="ls_elem_general_lighting">Общее освещение</string>
+
+	<string name="ls_elem_working_hours">рабочее время</string>
+
+	<string name="ls_elem_tendal_terrace">терраса тент</string>
+
+	<string name="ls_elem_reception_light">Стойка регистрации света</string>
+
+
+	<!--Updates date string-->
+
+	<string name="ls_single_second">1 секунда</string>
+
+	<string name="ls_seconds">секунд</string>
+
+	<string name="ls_single_minute">1 минута</string>
+
+	<string name="ls_minutes">минут</string>
+
+	<string name="ls_single_hour">1 час</string>
+
+	<string name="ls_hours">часа</string>
+
+	<string name="ls_single_day">1 день</string>
+
+	<string name="ls_days">дней</string>
+
+	<string name="New"></string>
+
+
+	<!---->
+
+
+	<!---->
+
+
+	<!---->
+
+
+</resources>
