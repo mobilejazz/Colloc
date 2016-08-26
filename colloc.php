@@ -211,7 +211,7 @@ function androidLineParse($key, $localizedString)
     resetOccurencesCounter();
     $localizedString = preg_replace_callback("/%([\.a-z])/", "replaceArgumentsIntoAndroidFormat", $localizedString);
 
-    $localizedString = str_replace("'", "'\'", $localizedString);
+    $localizedString = str_replace("'", "\'", $localizedString);
     $localizedString = str_replace("&", "&amp;", $localizedString);
     $localizedString = str_replace("<", "&lt;", $localizedString);
     $localizedString = str_replace(">", "&gt;", $localizedString);
