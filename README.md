@@ -169,6 +169,7 @@ Currently, Colloc only supports the following languages:
 | Russian    | ru     |
 | Turkish    | tr     |
 | Chinese    | zh     |
+| Greek      | el     |
 
 To use colloc with a different language, just use in the first row of the language-column the ISO639 language code (colloc translates the Language name to the ISO630 if available, otherwise uses the available language name as the language code).
 
