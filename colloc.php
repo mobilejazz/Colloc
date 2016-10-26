@@ -264,6 +264,7 @@ function writeIOSFiles($files, $destPath)
     $RussianPath    = "ru.lproj";
     $TurkishPath    = "tr.lproj";
     $ChinesePath    = "zh.lproj";
+    $JapanesePath   = "ja.lproj";
 
     foreach ($files as $languageName => $lines)
     {
@@ -334,6 +335,10 @@ function writeIOSFiles($files, $destPath)
         else if ($languageName == "Chinese")
         {
             $directory = $ChinesePath;
+        }
+        else if ($languageName == "Japanese")
+        {
+            $directory = $JapanesePath;
         }
         else
         {
@@ -450,7 +455,7 @@ function convertLanguageToISO639($language)
     $languages[ 'English' ]    = "en";
     $languages[ 'Spanish' ]    = "es";
     $languages[ 'German' ]     = "de";
-    $languages[ 'Greek' ]     = "el";
+    $languages[ 'Greek' ]      = "el";
     $languages[ 'French' ]     = "fr";
     $languages[ 'Italian' ]    = "it";
     $languages[ 'Portuguese' ] = "pt";
@@ -462,6 +467,7 @@ function convertLanguageToISO639($language)
     $languages[ 'Russian' ]    = "ru";
     $languages[ 'Turkish' ]    = "tr";
     $languages[ 'Chinese' ]    = "zh";
+    $languages[ 'Japanese' ]   = "ja";
 
     if (isset($languages[ $language ]))
     {
