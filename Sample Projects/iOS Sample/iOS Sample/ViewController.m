@@ -8,7 +8,18 @@
 
 #import "ViewController.h"
 
+// You can also put this import inside a Precompiled header (.PCH) file
+// for your project. This way, you don't have to import it every time
+// learn more: http://useyourloaf.com/blog/modules-and-precompiled-headers/
+
+#import "Localization.h"
+
+
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *okLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dismissLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cancelLabel;
+
 
 @end
 
@@ -16,12 +27,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    // Now use Colloc to assign those texts!
+    
+    self.okLabel.text = tr_generic_ok;
+    self.dismissLabel.text = tr_generic_dismiss;
+    self.cancelLabel.text = tr_generic_cancel;
 }
 
 @end
