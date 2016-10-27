@@ -89,6 +89,13 @@ if (count($localizationFileLines) > 0)
     $i     = 0;
     $lines = 0;
 
+    $iOSFiles[ "swift" ][] = "import Foundation"."\n\n".
+        "protocol LocalizedEnum : CustomStringConvertible {}\n\n".
+        "extension LocalizedEnum where Self: RawRepresentable, Self.RawValue == String {\n".
+            "\tvar description : String  {\n".
+                "\t\treturn NSLocalizedString(self.rawValue, comment: \"\")\n\t}\n}\n\n".
+        "enum Colloc: String, LocalizedEnum {";
+
     foreach ($localizationFileLines as $line)
     {
         if (trim($line) == "") // Get rid of empty lines
@@ -122,6 +129,8 @@ if (count($localizationFileLines) > 0)
                 $lines++;
 
                 $languageIndex = 0;
+                
+
 
                 foreach ($values as $value)
                 {
@@ -141,6 +150,8 @@ if (count($localizationFileLines) > 0)
                 }
 
                 $iOSFiles[ "header" ][] = "#define $key NSLocalizedString(@\"$key\", nil)";
+                $iOSFiles[ "swift" ][] = "case $key";
+
 
             }
             else
@@ -161,6 +172,9 @@ if (count($localizationFileLines) > 0)
 
         $i++;
     }
+    
+    $iOSFiles[ "swift" ][] = "}\n\ntypealias 🌏 = Colloc";
+
 
     echo "\n" . $outputDivider . "\n";
     echo "Lines: " . count($localizationFileLines);
@@ -346,6 +360,11 @@ function writeIOSFiles($files, $destPath)
         }
 
         $filename = $iOSPath . "/" . $directory . "/Localizable.strings";
+
+        if ($languageName == "swift")
+        {
+            $filename = $iOSPath . "/" . "Colloc.swift";
+        }
 
         if ($languageName == "header")
         {
