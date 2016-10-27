@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		99F496B51DC2073600ACA9A3 /* Colloc */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 99F496B81DC2073600ACA9A3 /* Build configuration list for PBXAggregateTarget "Colloc" */;
+			buildPhases = (
+				99F496B91DC2073B00ACA9A3 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Colloc;
+			productName = Colloc;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		99F496921DC1F9A800ACA9A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F496911DC1F9A800ACA9A3 /* AppDelegate.swift */; };
 		99F496941DC1F9A800ACA9A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F496931DC1F9A800ACA9A3 /* ViewController.swift */; };
@@ -144,6 +158,11 @@
 						DevelopmentTeam = 722SF2V9RH;
 						ProvisioningStyle = Automatic;
 					};
+					99F496B51DC2073600ACA9A3 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 722SF2V9RH;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 99F496891DC1F9A700ACA9A3 /* Build configuration list for PBXProject "iOS Swift Sample" */;
@@ -162,6 +181,7 @@
 			projectRoot = "";
 			targets = (
 				99F4968D1DC1F9A800ACA9A3 /* iOS Swift Sample */,
+				99F496B51DC2073600ACA9A3 /* Colloc */,
 			);
 		};
 /* End PBXProject section */
@@ -210,6 +230,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS Swift Sample/Pods-iOS Swift Sample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		99F496B91DC2073B00ACA9A3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\n##\n# The Google Document .tsv file path.\n# In this example we are using a local file. However you can point directly to the .tsv export of a google doc file.\n# To get the url just export your spreadsheet in tsv format and retrieve the download url from your browser.\nGDOC_PATH=\"${SRCROOT}/sampleGDocFile.tsv\"\n\n##\n# The colloc script path from the pod path.\n##\nCOLLOC_PATH=\"${SRCROOT}/Pods/Colloc/colloc.php\"\n\n\nOUTPUT_FOLDER_NAME=\"${SRCROOT}/Languages\" # Put the localization files in the same folder as the script\nOUTPUT_TYPE=\"100\" #100 for iOS export\n\necho \"exec \\\"php\\\" \\\"$COLLOC_PATH\\\" \\\"$GDOC_PATH\\\" \\\"$OUTPUT_FOLDER_NAME\\\" \\\"$OUTPUT_TYPE\\\"\"\nexec \"php\" \"$COLLOC_PATH\" \"$GDOC_PATH\" \"$OUTPUT_FOLDER_NAME\" \"$OUTPUT_TYPE\"";
 		};
 		C32DD0486433720CC50EE14C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -390,6 +423,22 @@
 			};
 			name = Release;
 		};
+		99F496B61DC2073600ACA9A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 722SF2V9RH;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		99F496B71DC2073600ACA9A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 722SF2V9RH;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -410,6 +459,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		99F496B81DC2073600ACA9A3 /* Build configuration list for PBXAggregateTarget "Colloc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99F496B61DC2073600ACA9A3 /* Debug */,
+				99F496B71DC2073600ACA9A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
