@@ -1,0 +1,8 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.1'
+
+use_frameworks!
+
+target :'iOS Swift Sample' do
+pod 'Colloc', :git => 'https://github.com/mobilejazz/Colloc.git'
+end
