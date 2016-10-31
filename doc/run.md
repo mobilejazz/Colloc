@@ -57,9 +57,12 @@ Import this file in your `.pch` project file. This way, you can easily use your 
 
 Becasue we are generating `#define` statements, Xcode will  provide autocompletion when using them:
 
-![](doc/img/xcode_autocompletion.png)
+![](../doc/img/xcode_autocompletion.png)
 
 For a easier usage, create a new Target in your Xcode project with the script above as a build phase. Then just by runing the schema corresponding to that target you will be able to update the localization files from the spreadsheet values.
+
+![](../doc/img/colloc_target.png)
+
 
 ### 3.2. To Android
 

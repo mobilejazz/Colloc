@@ -6,3 +6,8 @@ To get the exporting to `.tsv` URL just open the spreadsheet and select "File" >
 
 # Exporting from LibreOffice
 
+Select `File > Save as..`. Then in file type select Text CSV. This means "Comma separated Values"
+
+Then select as Field delimiter Tabs
+
+![](img/tabs.png)
