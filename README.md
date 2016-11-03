@@ -6,6 +6,10 @@ Wouldn't you like a simpler way to do this, while collaborating with your users,
 
 Colloc is a collaborative platform to manage the localizations for iOS and Android using a Spreadsheet.
 
+![](doc/img/4.code.gif)
+
+You can see Colloc in action [here](doc/inaction.md)
+
 ## Using Colloc is really simple
 
 ### 1. Install Colloc
