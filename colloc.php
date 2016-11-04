@@ -24,8 +24,11 @@ function stringStartsWith($haystack, $needle)
 
 function file_get_contents_utf8($fn)
 {
-    $content = file_get_contents($fn);
-
+    $arrContextOptions=array("ssl"=>array("verify_peer"=>false,
+                                          "verify_peer_name"=>false,
+                                          ),
+                             );
+    $content = file_get_contents($fn, false, stream_context_create($arrContextOptions));
     return mb_convert_encoding($content, 'UTF-8', mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
 }
 
