@@ -38,7 +38,7 @@ $editUrl                  = str_replace('&gid=0', '', $editUrl);
 $editUrl                  = str_replace('&output=txt', '', $editUrl);
 $GLOBALS[ "url_to_edit" ] = $editUrl;
 
-$destPath = "";
+$destPath = ".";
 
 $width = shell_exec('tput cols');
 if (!$width)
@@ -54,6 +54,8 @@ if ($argv[ 2 ])
     $destPath = $argv[ 2 ];
     echo("\nDestination Path: " . $destPath . "\n");
     echo $outputDivider . "\n";
+} else {
+    echo("\nWarning: EMPTY Destination Path, generating files in current directory\n");
 }
 
 if (!$argv[ 1 ])
