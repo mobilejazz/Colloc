@@ -14,7 +14,7 @@ There is only one file needed: the `colloc.php` file. Therefore the options are:
 - Download the `colloc.php` file manually and add it to your project.
 - Use the Cocoa Pod to get the file:
 ```
-pod 'Colloc', :git => 'https://github.com/mobilejazz/Colloc.git'
+pod 'Colloc', '~> 1.0.0'
 ```
 
 ## 1. Defining the Google Spreadsheet
