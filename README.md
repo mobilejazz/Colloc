@@ -1,3 +1,5 @@
+![Colloc](https://raw.githubusercontent.com/mobilejazz/metadata/master/images/banners/mobile-jazz-colloc.jpg)
+
 # Colloc
 Colloc is a collaborative platform to manage the localizations for iOS and Android using a Google Document.
 
