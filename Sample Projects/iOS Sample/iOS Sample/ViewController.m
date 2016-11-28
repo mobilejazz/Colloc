@@ -33,6 +33,7 @@
     self.okLabel.text = tr_generic_ok;
     self.dismissLabel.text = tr_generic_dismiss;
     self.cancelLabel.text = tr_generic_cancel;
+    self.title = tr_colloc_is; // NICE
 }
 
 @end
