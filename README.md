@@ -43,7 +43,7 @@ You can run Colloc directly from the command line, or integrate in your projects
 
 ## Code Samples
 
-You can find working samples in the [samples folder](Sample+Projects)
+You can find working samples in the [samples folder](Sample%20Projects)
 
 ## Language Support
 
