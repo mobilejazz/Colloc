@@ -22,7 +22,4 @@ Pod::Spec.new do |s|
     s.social_media_url = 'https://twitter.com/mobilejazzcom'
     
     s.resources = ['colloc.php', 'run_script_sample.sh']
-
-    s.script_phase = { :name => 'Hello World', :script => 'echo "Hello World"' }
-    
 end
