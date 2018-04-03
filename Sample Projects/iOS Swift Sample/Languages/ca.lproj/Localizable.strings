@@ -1,5 +1,6 @@
-/**	This is an automatically generated file	Please don't modify it.	If you need to change some text please do so at	sampleGDocFile.tsv	*/"tr_generic_ok" = "Acceptar";
+/**	This is an automatically generated file	Please don't modify it.	If you need to change some text please do so at	/Users/martinhj/Documents/MobileJazz/OpenSource/Colloc/Sample Projects/iOS Swift Sample/sampleGDocFile.tsv	*/"tr_generic_ok" = "Acceptar";
 "tr_generic_dismiss" = "Tancar";
 "tr_generic_cancel" = "Cancel·lar";
 "tr_generic_done" = "Fet";
 "tr_generic_back" = "Enrera";
+"tr_generic_next" = "Següent";

@@ -95,11 +95,11 @@ if (count($localizationFileLines) > 0)
     $lines = 0;
 
     $iOSFiles[ "swift" ][] = "import Foundation"."\n\n".
-        "protocol LocalizedEnum : CustomStringConvertible {}\n\n".
+        "public protocol LocalizedEnum : CustomStringConvertible {}\n\n".
         "extension LocalizedEnum where Self: RawRepresentable, Self.RawValue == String {\n".
-            "\tvar description : String  {\n".
+            "\tpublic var description : String  {\n".
                 "\t\treturn NSLocalizedString(self.rawValue, comment: \"\")\n\t}\n}\n\n".
-        "enum Colloc: String, LocalizedEnum {";
+        "public enum Colloc: String, LocalizedEnum {";
 
     foreach ($localizationFileLines as $line)
     {
@@ -155,7 +155,7 @@ if (count($localizationFileLines) > 0)
                 }
 
                 $iOSFiles[ "header" ][] = "#define $key NSLocalizedString(@\"$key\", nil)";
-                $iOSFiles[ "swift" ][] = "case $key";
+                $iOSFiles[ "swift" ][] = "\tcase $key";
 
 
             }
@@ -271,7 +271,7 @@ function writeIOSFiles($files, $destPath)
     $EnglishPath    = "en.lproj";
     $SpanishPath    = "es.lproj";
     $GermanPath     = "de.lproj";
-    $GreekPath     = "el.lproj";
+    $GreekPath      = "el.lproj";
     $FrenchPath     = "fr.lproj";
     $ItalianPath    = "it.lproj";
     $PortuguesePath = "pt.lproj";
