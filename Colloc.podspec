@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'Colloc'
-    s.version          = '1.0.3'
+    s.version          = '1.0.4'
     s.summary          = 'Collaborative Localizations for iOS and Android using Google Documents'
     
     s.description      = <<-DESC
@@ -21,5 +21,5 @@ Pod::Spec.new do |s|
     s.source           = { :git => 'https://github.com/mobilejazz/Colloc.git', :tag => s.version.to_s }
     s.social_media_url = 'https://twitter.com/mobilejazzcom'
     
-    s.resources = ['colloc.php', 'run_script_sample.sh']
+    s.preserve_paths = ['colloc.php', 'run_script_sample.sh']
 end
