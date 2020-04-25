@@ -2,13 +2,13 @@
 <?php
 /*
  * Copyright 2015 Mobile Jazz SL
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -68,12 +68,12 @@ if (!$argv[ 1 ])
 
 /*
  * argv 3 specifies which files get exported in a bitwise operator value:
- * 
+ *
  * 100 exports only iOS
  * 010 exports only Android
  * 001 exports only JSON
  * 110 Exports iOS+Android
- * 
+ *
  */
 
 if (!$argv[ 3 ])
@@ -134,7 +134,7 @@ if (count($localizationFileLines) > 0)
                 $lines++;
 
                 $languageIndex = 0;
-                
+
 
 
                 foreach ($values as $value)
@@ -177,7 +177,7 @@ if (count($localizationFileLines) > 0)
 
         $i++;
     }
-    
+
     $iOSFiles[ "swift" ][] = "}\n\ntypealias 🌏 = Colloc";
 
 
@@ -271,6 +271,7 @@ function writeIOSFiles($files, $destPath)
     $EnglishPath    = "en.lproj";
     $SpanishPath    = "es.lproj";
     $GermanPath     = "de.lproj";
+    $CzechPath      = "cs.lproj";
     $GreekPath      = "el.lproj";
     $FrenchPath     = "fr.lproj";
     $ItalianPath    = "it.lproj";
@@ -306,6 +307,10 @@ function writeIOSFiles($files, $destPath)
         else if ($languageName == "German")
         {
             $directory = $GermanPath;
+        }
+        else if ($languageName == "Czech")
+        {
+            $directory = $CzechPath;
         }
         else if ($languageName == "Greek")
         {
@@ -479,6 +484,7 @@ function convertLanguageToISO639($language)
     $languages[ 'English' ]    = "en";
     $languages[ 'Spanish' ]    = "es";
     $languages[ 'German' ]     = "de";
+    $languages[ 'Czech' ]      = "cs";
     $languages[ 'Greek' ]      = "el";
     $languages[ 'French' ]     = "fr";
     $languages[ 'Italian' ]    = "it";

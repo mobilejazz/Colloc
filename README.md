@@ -54,6 +54,7 @@ Currently, Colloc supports the following languages:
 | English    | en     |
 | Spanish    | es     |
 | Catalan    | ca     |
+| Czech      | cs     |
 | German     | de     |
 | French     | fr     |
 | Italian    | it     |
