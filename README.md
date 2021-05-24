@@ -73,6 +73,68 @@ Currently, Colloc supports the following languages:
 To use colloc with a different language, just use in the first row of the language-column the ISO639 language code (colloc translates the Language name to the ISO630 if available, otherwise uses the available language name as the language code).
 
 ---
+
+## Colloc Best Practices 
+
+All apps at Mobile Jazz should be ready for translation. This document groups different rules that some members of the team were already applying so in the future is clear for everyone. 
+
+We use Colloc for translations in iOS and Android on the web we use. 
+
+### Integrating colloc in the app 
+
+Create a new spreadsheet in the Google Drive shared with the client, so the client can review and change strings by itself. 
+You can use the template included in this repository.
+
+For development purposes you can use the following snippet to use Google Translator in a cell: 
+
+```
+=GOOGLETRANSLATE(string_key,origin_language,target_language)
+
+// Example: 
+=GOOGLETRANSLATE($B34,$B$2,D$2)
+```
+
+Note: **It is important to integrate colloc from the beginning of the development** because finding all the strings later is time consuming and frustrating (specially if the person localizing the app is not the same as the person that created the UI). 
+
+### Key conventions
+Apart of the colloc conventions like using “#” for comments we use the following convention for keys: 
+
+```
+ls_screen_name_screen_component_hint_string
+```
+
+Where: 
+
+- ls stands for localized string 
+- screen_name for the screen in which is displayed. Example: login
+- component for the UI component in which is shown. Example: button 
+- hint is a hint that gives meaning about the string purpose. Example: forgot password
+
+Example: 
+
+```
+ls_login_button_forgot_password
+```
+
+### Spreadsheet conventions
+
+#### 1. Organization
+Try to be organized. Group strings by screens and components and use headers to make the separation clear 
+
+
+#### 2. Avoid reusing strings  
+Add a different string for each component that uses it. Even if it is the exact same string.
+
+Doing so, when the client asks for a change in a particular screen we can make a safe change and we don’t affect other screens. 
+
+#### 3. Generic strings
+Generic strings are the exceptions to the previous rule. 
+
+At the beginning of the screen you can add a list of generic strings that might be used along the app like: Ok, Accept, Yes, No, Close, Back, Warning… 
+
+For this particular case use ls_generic_string pattern. For example: `ls_generic_ok`, `ls_generic_accept`, ... 
+
+---
 ## License
 
 Copyright 2015 Mobile Jazz SL
