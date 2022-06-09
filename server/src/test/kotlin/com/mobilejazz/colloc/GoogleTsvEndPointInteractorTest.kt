@@ -3,7 +3,6 @@ package com.mobilejazz.colloc
 import com.mobilejazz.colloc.domain.interactor.GoogleTsvEndPointInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.io.File
@@ -50,9 +49,20 @@ class GoogleTsvEndPointInteractorTest {
         runBlocking {
             val link =
                 "https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"
-            val result = (GoogleTsvEndPointInteractor())(link, listOf(Platform.IOS, Platform.ANDROID, Platform.JSON))
-            println(result?.absolutePath)
+            val result = (GoogleTsvEndPointInteractor())(
+                link,
+                listOf(Platform.IOS, Platform.ANDROID, Platform.JSON, Platform.ANGULAR)
+            )
             assert(result is File)
+        }
+    }
+
+    @Test
+    fun `no platforms returns an error`() {
+        runBlocking {
+            assertThrows<GoogleTsvEndPointInteractor.Error.InvalidPlatformException> {
+                (GoogleTsvEndPointInteractor())("some random string", listOf())
+            }
         }
     }
 }
