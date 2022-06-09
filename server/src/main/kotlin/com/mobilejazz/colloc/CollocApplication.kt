@@ -7,11 +7,16 @@ import org.springframework.boot.runApplication
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import com.mobilejazz.colloc.classic.CollocClassicInteractor
+import com.mobilejazz.colloc.classic.Platform
+import java.io.File
+import java.net.URL
 
 
 @SpringBootApplication
 @RestController
 class CollocApplication {
+
     @GetMapping("/hello")
     suspend fun hello(@RequestParam(value = "name", defaultValue = "World") name: String?): String {
         val downloadFileInteractor = DownloadFileInteractor()
@@ -20,9 +25,23 @@ class CollocApplication {
         return String.format("Hello %s!", name)
     }
 
+    @GetMapping("/classic")
+    fun classic(
+        @RequestParam(value = "url") url: String?,
+        @RequestParam(value = "platform") platform: String?
+    ): String {
+        val u =
+            URL("https://docs.google.com/spreadsheets/d/13EXpNK62xYm2UiTW-MhNP6eij2GV_vMpmOJNTeYNG7w/export?format=tsv")
+        val p = Platform.IOS
+        val output = File("/tmp/output/")
+        val classic = CollocClassicInteractor()
+        classic.invoke(u, output, p)
+        return "OK"
+    }
+
     @GetMapping("/google-tsv")
     fun googleTsv(@RequestParam(value = "link", defaultValue = "") link: String?): String {
-        val result  = (GoogleTsvEndPointInteractor())(link)
+        val result = (GoogleTsvEndPointInteractor())(link)
         return String.format("TSV download link: %s", result)
     }
 }
