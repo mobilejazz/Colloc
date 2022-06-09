@@ -7,8 +7,26 @@ import java.io.File
 
 class GoogleTsvEndPointInteractorTest {
     @Test
-    fun `no link provided returns null`() {
+    fun `no link returns null`() {
         val result = (GoogleTsvEndPointInteractor())("")
+        assertEquals(result, null)
+    }
+
+    @Test
+    fun `incorrect link returns null`() {
+        val result = (GoogleTsvEndPointInteractor())("some random string")
+        assertEquals(result, null)
+    }
+
+    @Test
+    fun `no google docs link returns null`() {
+        val result = (GoogleTsvEndPointInteractor())("https://www.google.com")
+        assertEquals(result, null)
+    }
+
+    @Test
+    fun `no google spreadsheets link returns null`() {
+        val result = (GoogleTsvEndPointInteractor())("https://docs.google.com/a/somerandomstring")
         assertEquals(result, null)
     }
 

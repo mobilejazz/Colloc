@@ -6,7 +6,7 @@ import java.net.URL
 
 class GoogleTsvEndPointInteractor {
     operator fun invoke(link: String?): File? {
-        val validatedLinkOrNull = isLinkValid(link)
+        val validatedLinkOrNull = validateLink(link)
 
         if (validatedLinkOrNull === null) {
             return null
@@ -22,18 +22,30 @@ class GoogleTsvEndPointInteractor {
         return zip
     }
 
-    private fun isLinkValid(link: String?): URL? {
+    private fun validateLink(link: String?): URL? {
         if (link === null) {
             return null
         }
 
-        try {
+        val url = try {
             val url = URL(link)
             url.toURI()
-            return url
+            url
         } catch (e: MalformedURLException) {
             return null
         }
+
+        val domain = url.host
+        val path = url.path
+
+        if (
+            !domain.startsWith("docs.google.com")
+            || !path.contains("spreadsheets")
+        ) {
+            return null
+        }
+
+        return url
     }
 
     /**
