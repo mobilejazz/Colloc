@@ -43,9 +43,10 @@ class ParseCsvInteractor {
     private fun Array<String>.extractLanguagePositions(): List<Int> {
         val positionList = mutableListOf<Int>()
         forEachIndexed { index, s ->
-            if (s.isAlphanumeric())
+            if (s.isValid())
                 positionList.add(index)
         }
+        println(positionList)
         return positionList
     }
 
@@ -58,7 +59,5 @@ class ParseCsvInteractor {
 //            }
 //        }
 //    }
-//
-    private val alphaNumericRegex = "^[a-zA-Z0-9_]*\$".toRegex()
-    private fun String.isAlphanumeric() = matches(alphaNumericRegex)
+    private fun String.isValid() = this != "#" && isNotEmpty()
 }
