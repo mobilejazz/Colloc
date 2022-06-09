@@ -1,0 +1,24 @@
+services:
+  traefik:
+    image: traefik:2.7
+    restart: unless-stopped
+    ports:
+      - 80:80
+    command:
+      - --api.debug=false
+      - --log.level=ERROR
+      - --providers.docker.endpoint=unix:///var/run/docker.sock
+      - --providers.docker.watch=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.websecure.address=:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  colloc:
+    image: registry.mobilejazz.com/colloc/server:$COLLOC_VERSION
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.colloc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.colloc-secure.entrypoints=websecure"
+      - "traefik.http.routers.colloc-secure.rule=PathPrefix(`/`)"

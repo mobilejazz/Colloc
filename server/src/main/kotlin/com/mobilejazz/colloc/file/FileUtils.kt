@@ -5,14 +5,18 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 object FileUtils {
-    fun createFile(directory: String, fileName: String) {
+    fun createFile(directory: String, fileName: String): File {
         // Create directory if not doesn't exist
         createDirectory(directory)
-        File(directory, fileName).createNewFile()
+        return File(directory, fileName).apply {
+            createNewFile()
+        }
     }
 
-    fun createDirectory(directory: String) =
-            File(directory).mkdirs()
+    fun createDirectory(directory: String): File =
+            File(directory).apply {
+                mkdirs()
+            }
 
     fun generateZip(fileToZip: File, zipFile: File) {
         ZipOutputStream(BufferedOutputStream(FileOutputStream(zipFile))).use { zos ->
