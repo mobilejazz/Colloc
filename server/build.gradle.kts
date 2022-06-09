@@ -28,6 +28,8 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.2")
 
+	implementation("com.opencsv:opencsv:5.6")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
