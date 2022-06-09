@@ -18,48 +18,53 @@ import java.net.URL
 @RestController
 class CollocApplication {
 
-    @GetMapping("/hello")
-    suspend fun hello(@RequestParam(value = "name", defaultValue = "World") name: String?): String {
-        return String.format("Hello %s!", name)
-    }
+  @GetMapping("/hello")
+  suspend fun hello(@RequestParam(value = "name", defaultValue = "World") name: String?): String {
+    return String.format("Hello %s!", name)
+  }
 
-    @GetMapping("/classic")
-    fun classic(
-        @RequestParam(value = "url") url: String?,
-        @RequestParam(value = "platform") platform: String?
-    ): String {
-        val u =
-            URL("https://docs.google.com/spreadsheets/d/13EXpNK62xYm2UiTW-MhNP6eij2GV_vMpmOJNTeYNG7w/export?format=tsv")
-        val p = Platform.IOS
-        val output = File("/tmp/output/")
-        val classic = CollocClassicInteractor()
-        classic.invoke(u, output, p)
-        return "OK"
-    }
+  @GetMapping("/classic")
+  fun classic(
+    @RequestParam(value = "url") url: String?,
+    @RequestParam(value = "platform") platform: String?
+  ): String {
+    val u =
+      URL("https://docs.google.com/spreadsheets/d/13EXpNK62xYm2UiTW-MhNP6eij2GV_vMpmOJNTeYNG7w/export?format=tsv")
+    val p = Platform.IOS
+    val output = File("/tmp/output/")
+    val classic = CollocClassicInteractor()
+    classic.invoke(u, output, p)
+    return "OK"
+  }
 
-    @GetMapping("/google-tsv")
-    suspend fun googleTsv(@RequestParam(value = "link", defaultValue = "") link: String?): String {
-        val googleTsvEndPointInteractor = GoogleTsvEndPointInteractor()
-        val result = googleTsvEndPointInteractor(link, listOf(Platform.IOS))
+  @GetMapping("/google-tsv")
+//  suspend fun googleTsv(@RequestParam(value = "link") link: String?, @RequestParam(value = "platform") platform: Platform): String {
+  suspend fun googleTsv(
+    @RequestParam(value = "link") link: String,
+    @RequestParam(value = "platform") platform: Platform
+  ): String {
+//    val googleTsvEndPointInteractor = GoogleTsvEndPointInteractor()
+//    val result = googleTsvEndPointInteractor(link, listOf(Platform.IOS))
 
-        return String.format("TSV download link: %s", result)
-    }
+//    return String.format("TSV download link: %s", result)
+    return String.format("Platforms: $platform")
+  }
 
-    @GetMapping(
-        value = ["/demo"],
-        produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
+  @GetMapping(
+    value = ["/demo"],
+    produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
+  )
+  suspend fun demoDownloadFile(@RequestParam(value = "link", defaultValue = "") link: String?): ByteArray {
+    val downloadFileInteractor = DownloadFileInteractor()
+    val a = downloadFileInteractor(
+      url = URL("https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"),
+      "downloadedTsv.tsv"
     )
-    suspend fun demoDownloadFile(@RequestParam(value = "link", defaultValue = "") link: String?): ByteArray {
-        val downloadFileInteractor = DownloadFileInteractor()
-        val a = downloadFileInteractor(
-            url = URL("https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"),
-            "downloadedTsv.tsv"
-        )
 
-        return a.readBytes()
-    }
+    return a.readBytes()
+  }
 }
 
 fun main(args: Array<String>) {
-    runApplication<CollocApplication>(*args)
+  runApplication<CollocApplication>(*args)
 }
