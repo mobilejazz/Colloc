@@ -21,3 +21,7 @@ DerivedData
 Pods
 Podfile.lock
 iOS\ Sample.xcworkspace
+
+#Generated Files
+/colloc_output
+/poedit
