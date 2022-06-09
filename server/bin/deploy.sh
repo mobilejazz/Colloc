@@ -6,4 +6,4 @@ docker push registry.mobilejazz.com/colloc/server:"$DOCKER_IMAGE_TAG"
 
 # copy docker-compose.yml, set the version in the .env file and docker-compose up
 scp docker-compose.prod.yml "$SERVER_USER"@"$SERVER_ADDRESS":docker-compose.yml
-ssh "$SERVER_USER"@"$SERVER_ADDRESS" "sh echo COLLOC_VERSION=${DOCKER_IMAGE_TAG} > .env && docker-compose up -d --remove-orphans"
+ssh "$SERVER_USER"@"$SERVER_ADDRESS" "sh -c echo COLLOC_VERSION=${DOCKER_IMAGE_TAG} > .env && docker-compose up -d --remove-orphans"
