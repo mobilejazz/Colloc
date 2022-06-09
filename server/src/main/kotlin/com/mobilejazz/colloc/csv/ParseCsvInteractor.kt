@@ -7,38 +7,41 @@ import java.nio.charset.StandardCharsets
 
 class ParseCsvInteractor {
     operator fun invoke(filePath: String): Map<String, Map<String, String>> {
-        val map = mutableMapOf<String, MutableMap<String, String>>()
-        var isFirstLine = true
+        val dictionary = mutableMapOf<String, MutableMap<String, String>>()
+        var rowIndex = 0
         lateinit var languagePositionMap : Map<String, Int>
 
         FileReader(filePath, StandardCharsets.UTF_8).use { fr ->
             CSVReader(fr).use { reader ->
                 var nextLine = reader.readNext()
                 while (nextLine != null) {
-                    if (isFirstLine) {
-                        languagePositionMap = nextLine.extractLanguagePositions()
+                    if (rowIndex == 0) {
+                        languagePositionMap = nextLine.extractLanguagePositionMap()
                         languagePositionMap.forEach {
-                            map[it.key] = mutableMapOf()
+                            dictionary[it.key] = mutableMapOf()
                         }
-                        isFirstLine = false
                     }
-                    map.entries.forEach {
-                        it.value[nextLine[0]] = nextLine[languagePositionMap[it.key]!!]
+                    val translationKey = nextLine[0]
+                    if (rowIndex >= 2 && translationKey.isValid()) {
+                        dictionary.entries.forEach {
+                            it.value[translationKey] = nextLine[languagePositionMap[it.key]!!]
+                        }
                     }
                     nextLine = reader.readNext()
+                    rowIndex+=1
                 }
             }
         }
-        return map
+        return dictionary
     }
 
-    private fun Array<String>.extractLanguagePositions(): Map<String, Int> {
-        val positionList = mutableMapOf<String, Int>()
+    private fun Array<String>.extractLanguagePositionMap(): Map<String, Int> {
+        val languagePositionMap = mutableMapOf<String, Int>()
         forEachIndexed { index, s ->
             if (s.isValid())
-                positionList[s] = index
+                languagePositionMap[s] = index
         }
-        return positionList
+        return languagePositionMap
     }
 
     private fun String.isValid() = this != "#" && isNotEmpty()
