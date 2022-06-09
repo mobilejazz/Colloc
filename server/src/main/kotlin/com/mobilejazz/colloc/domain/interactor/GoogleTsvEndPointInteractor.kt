@@ -12,7 +12,7 @@ class GoogleTsvEndPointInteractor(
     val downloadFileInteractor: DownloadFileInteractor = DownloadFileInteractor(),
     val collocClassicInteractor: CollocClassicInteractor = CollocClassicInteractor(),
 ) {
-    suspend operator fun invoke(link: String?, platforms: List<Platform>): File? {
+    operator fun invoke(link: String?, platforms: List<Platform>): File? {
         val validatedLinkOrNull = validateLink(link)
 
         if (validatedLinkOrNull === null) {
@@ -67,7 +67,7 @@ class GoogleTsvEndPointInteractor(
     }
 
     private fun compressFolder(tempFolder: File): File {
-        val zippedFile = FileUtils.createFile("/tmp/" + UUID.randomUUID().toString() + ".zip")
+        val zippedFile = FileUtils.createFile("/tmp/", UUID.randomUUID().toString() + ".zip")
         FileUtils.generateZip(tempFolder, zippedFile)
         return zippedFile
     }
