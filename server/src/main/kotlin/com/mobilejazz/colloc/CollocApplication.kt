@@ -1,9 +1,9 @@
 package com.mobilejazz.colloc
 
 import com.mobilejazz.colloc.classic.CollocClassicInteractor
-import com.mobilejazz.colloc.classic.Platform
 import com.mobilejazz.colloc.domain.interactor.DownloadFileInteractor
 import com.mobilejazz.colloc.domain.interactor.GoogleTsvEndPointInteractor
+import com.mobilejazz.colloc.domain.model.Platform
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.http.MediaType
@@ -18,9 +18,9 @@ import java.net.URL
 @RestController
 class CollocApplication {
 
-  @GetMapping("/hello")
-  suspend fun hello(@RequestParam(value = "name", defaultValue = "World") name: String?): String {
-    return String.format("Hello %s!", name)
+  @GetMapping("/")
+  suspend fun example(@RequestParam(value = "name", defaultValue = "World") name: String?): String {
+    return "Format to request /google-tsv?platform=*IOS|ANDROID|JSON|ANGULAR*&link=*GOOGLELINK*"
   }
 
   @GetMapping("/classic")
@@ -37,31 +37,18 @@ class CollocApplication {
     return "OK"
   }
 
-  @GetMapping("/google-tsv")
-//  suspend fun googleTsv(@RequestParam(value = "link") link: String?, @RequestParam(value = "platform") platform: Platform): String {
+  @GetMapping(
+    value =["/google-tsv"],
+    produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
+  )
   suspend fun googleTsv(
     @RequestParam(value = "link") link: String,
     @RequestParam(value = "platform") platform: Platform
-  ): String {
-//    val googleTsvEndPointInteractor = GoogleTsvEndPointInteractor()
-//    val result = googleTsvEndPointInteractor(link, listOf(Platform.IOS))
+  ): ByteArray? {
+    val googleTsvEndPointInteractor = GoogleTsvEndPointInteractor()
+    val result = googleTsvEndPointInteractor(link, listOf(Platform.IOS))
 
-//    return String.format("TSV download link: %s", result)
-    return String.format("Platforms: $platform")
-  }
-
-  @GetMapping(
-    value = ["/demo"],
-    produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
-  )
-  suspend fun demoDownloadFile(@RequestParam(value = "link", defaultValue = "") link: String?): ByteArray {
-    val downloadFileInteractor = DownloadFileInteractor()
-    val a = downloadFileInteractor(
-      url = URL("https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"),
-      "downloadedTsv.tsv"
-    )
-
-    return a.readBytes()
+    return result?.readBytes()
   }
 }
 
