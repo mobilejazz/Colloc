@@ -1,7 +1,7 @@
 package com.mobilejazz.colloc.domain.interactor
 
 import com.mobilejazz.colloc.classic.CollocClassicInteractor
-import com.mobilejazz.colloc.classic.Platform
+import com.mobilejazz.colloc.domain.model.Platform
 import com.mobilejazz.colloc.file.FileUtils
 import java.io.File
 import java.net.MalformedURLException
@@ -12,22 +12,26 @@ class GoogleTsvEndPointInteractor(
     val downloadFileInteractor: DownloadFileInteractor = DownloadFileInteractor(),
     val collocClassicInteractor: CollocClassicInteractor = CollocClassicInteractor(),
 ) {
-    operator fun invoke(link: String?, platforms: List<Platform>): File? {
+    suspend operator fun invoke(link: String?, platforms: List<Platform>): File? {
         val validatedLinkOrNull = validateLink(link)
 
         if (validatedLinkOrNull === null) {
             return null
         }
 
-//        val tsv = downloadTsv(validatedLinkOrNull)
         val tempFolder = generateTempFolder()
 
         for (platform in platforms) {
-            collocClassicInteractor(validatedLinkOrNull, tempFolder, platform)
+            if (platform === Platform.ANGULAR) {
+                val tsv = downloadTsv(validatedLinkOrNull)
+                generateAngularLocales(tempFolder)
+            } else {
+                collocClassicInteractor(validatedLinkOrNull, tempFolder, platform)
+            }
         }
 
         val zip = compressFolder(tempFolder)
-//        deleteTempFolder(tempFolder)
+        deleteTempFolder(tempFolder)
 
         return zip
     }
@@ -64,6 +68,13 @@ class GoogleTsvEndPointInteractor(
 
     suspend private fun downloadTsv(link: URL): File {
         return downloadFileInteractor(link, "downloadedTsv.tsv")
+    }
+
+    /**
+     * @todo
+     */
+    private fun generateAngularLocales(tempFolder: File) {
+        // waiting angular generation
     }
 
     private fun compressFolder(tempFolder: File): File {
