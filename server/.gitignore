@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# project specific
+colloc.php
