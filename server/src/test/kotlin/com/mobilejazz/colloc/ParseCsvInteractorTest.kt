@@ -12,7 +12,7 @@ class ParseCsvInteractorTest {
   fun `should success`() = runBlocking {
     val interactor = ParseCsvInteractor()
     val download = DownloadFileInteractor()
-    download("")
+//    download("")
     assertEquals(true, true)
   }
 }
