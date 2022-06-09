@@ -2,6 +2,7 @@ package com.mobilejazz.colloc.domain.interactor
 
 import com.mobilejazz.colloc.classic.CollocClassicInteractor
 import com.mobilejazz.colloc.classic.Platform
+import com.mobilejazz.colloc.file.FileUtils
 import java.io.File
 import java.net.MalformedURLException
 import java.net.URL
@@ -57,9 +58,6 @@ class GoogleTsvEndPointInteractor(
         return url
     }
 
-    /**
-     * @todo
-     */
     private fun generateTempFolder(): File {
         return File("/tmp/" + UUID.randomUUID().toString())
     }
@@ -68,11 +66,10 @@ class GoogleTsvEndPointInteractor(
         return downloadFileInteractor(link, "downloadedTsv.tsv")
     }
 
-    /**
-     * @todo
-     */
     private fun compressFolder(tempFolder: File): File {
-        return File("")
+        val zippedFile = FileUtils.createFile("/tmp/" + UUID.randomUUID().toString() + ".zip")
+        FileUtils.generateZip(tempFolder, zippedFile)
+        return zippedFile
     }
 
     private fun deleteTempFolder(tempFolder: File): Boolean {
