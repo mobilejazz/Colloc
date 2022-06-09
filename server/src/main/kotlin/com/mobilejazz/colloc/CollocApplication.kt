@@ -39,7 +39,8 @@ class CollocApplication {
 
     @GetMapping("/google-tsv")
     suspend fun googleTsv(@RequestParam(value = "link", defaultValue = "") link: String?): String {
-        val result = (GoogleTsvEndPointInteractor())(link)
+        val googleTsvEndPointInteractor = GoogleTsvEndPointInteractor()
+        val result = googleTsvEndPointInteractor(link, listOf(Platform.IOS))
 
         return String.format("TSV download link: %s", result)
     }

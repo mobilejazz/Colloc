@@ -1,25 +1,33 @@
 package com.mobilejazz.colloc.domain.interactor
 
+import com.mobilejazz.colloc.classic.CollocClassicInteractor
+import com.mobilejazz.colloc.classic.Platform
+import com.mobilejazz.colloc.file.FileUtils
 import java.io.File
 import java.net.MalformedURLException
 import java.net.URL
+import java.util.UUID
 
 class GoogleTsvEndPointInteractor(
-    val downloadFileInteractor: DownloadFileInteractor = DownloadFileInteractor()
+    val downloadFileInteractor: DownloadFileInteractor = DownloadFileInteractor(),
+    val collocClassicInteractor: CollocClassicInteractor = CollocClassicInteractor(),
 ) {
-    suspend operator fun invoke(link: String?): File? {
+    suspend operator fun invoke(link: String?, platforms: List<Platform>): File? {
         val validatedLinkOrNull = validateLink(link)
 
         if (validatedLinkOrNull === null) {
             return null
         }
 
-        val tsv = downloadTsv(validatedLinkOrNull)
+//        val tsv = downloadTsv(validatedLinkOrNull)
         val tempFolder = generateTempFolder()
 
-        generateJson(tsv, tempFolder)
+        for (platform in platforms) {
+            collocClassicInteractor(validatedLinkOrNull, tempFolder, platform)
+        }
+
         val zip = compressFolder(tempFolder)
-        deleteTempFolder(tempFolder)
+//        deleteTempFolder(tempFolder)
 
         return zip
     }
@@ -50,38 +58,21 @@ class GoogleTsvEndPointInteractor(
         return url
     }
 
-    /**
-     * @todo
-     */
-    private fun generateTempFolder(): String {
-        return ""
+    private fun generateTempFolder(): File {
+        return File("/tmp/" + UUID.randomUUID().toString())
     }
 
-    /**
-     * @todo
-     */
     suspend private fun downloadTsv(link: URL): File {
-        return (this.downloadFileInteractor)(link, "downloadedTsv.tsv")
+        return downloadFileInteractor(link, "downloadedTsv.tsv")
     }
 
-    /**
-     * @todo
-     */
-    private fun generateJson(tsv: File, tempFolder: String): Boolean {
-        return true
+    private fun compressFolder(tempFolder: File): File {
+        val zippedFile = FileUtils.createFile("/tmp/" + UUID.randomUUID().toString() + ".zip")
+        FileUtils.generateZip(tempFolder, zippedFile)
+        return zippedFile
     }
 
-    /**
-     * @todo
-     */
-    private fun compressFolder(tempFolder: String): File {
-        return File("")
-    }
-
-    /**
-     * @todo
-     */
-    private fun deleteTempFolder(tempFolder: String): Boolean {
-        return true
+    private fun deleteTempFolder(tempFolder: File): Boolean {
+        return tempFolder.deleteRecursively()
     }
 }
