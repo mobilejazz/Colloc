@@ -15,7 +15,7 @@ class CollocApplication {
     @GetMapping("/hello")
     suspend fun hello(@RequestParam(value = "name", defaultValue = "World") name: String?): String {
         val downloadFileInteractor = DownloadFileInteractor()
-        val a = downloadFileInteractor(url = "https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o")
+        val a = downloadFileInteractor(url = "https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o", "output")
         println(a.absolutePath)
         return String.format("Hello %s!", name)
     }
