@@ -2,4 +2,8 @@
 
 ## Building
 
-    DOCKER_BUILDKIT=1 docker build -t registry.mobilejazz.com/colloc/server .
+    bin/build.sh
+
+## Running
+
+    docker-compose up -d
