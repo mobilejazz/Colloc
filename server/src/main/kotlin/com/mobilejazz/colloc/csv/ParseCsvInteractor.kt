@@ -44,5 +44,5 @@ class ParseCsvInteractor {
         return languagePositionMap
     }
 
-    private fun String.isValid() = this != "#" && isNotEmpty()
+    private fun String.isValid() = !this.contains("#") && isNotBlank()
 }
