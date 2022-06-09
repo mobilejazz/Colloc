@@ -1,4 +1,4 @@
-key,#,English,#,Spanish,#,Catalan,#
+,#,English,#,Spanish,#,Catalan,#
 ,Comments,en,Char count,es,Char count,ca,Char count
 #Generic,,,,,,,
 ls_generic_accept,"No tenim la app. No estem segurs si en català seria ""D'acord"" o ""Acceptar"", depèn del context",Ok,2,Aceptar,7,D'acord,7
