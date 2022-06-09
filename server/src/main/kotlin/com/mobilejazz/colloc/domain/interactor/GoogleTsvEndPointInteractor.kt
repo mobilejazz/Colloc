@@ -4,8 +4,10 @@ import java.io.File
 import java.net.MalformedURLException
 import java.net.URL
 
-class GoogleTsvEndPointInteractor {
-    operator fun invoke(link: String?): File? {
+class GoogleTsvEndPointInteractor(
+    val downloadFileInteractor: DownloadFileInteractor = DownloadFileInteractor()
+) {
+    suspend operator fun invoke(link: String?): File? {
         val validatedLinkOrNull = validateLink(link)
 
         if (validatedLinkOrNull === null) {
@@ -58,8 +60,8 @@ class GoogleTsvEndPointInteractor {
     /**
      * @todo
      */
-    private fun downloadTsv(link: URL): File {
-        return File("")
+    suspend private fun downloadTsv(link: URL): File {
+        return (this.downloadFileInteractor)(link, "downloadedTsv.tsv")
     }
 
     /**

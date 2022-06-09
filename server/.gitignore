@@ -36,5 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 
+### Geneerated Files ###
+/*.tsv
+
 # project specific
 colloc.php
