@@ -16,5 +16,6 @@ class CollocClassicInteractorTest {
         val classic = CollocClassicInteractor()
         classic(url, output, platform)
         assert(output.length() > 0)
+        output.deleteRecursively()
     }
 }
