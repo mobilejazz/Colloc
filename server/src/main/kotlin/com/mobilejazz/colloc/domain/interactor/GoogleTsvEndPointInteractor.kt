@@ -1,8 +1,12 @@
 package com.mobilejazz.colloc.domain.interactor
 
 import com.mobilejazz.colloc.classic.CollocClassicInteractor
+import com.mobilejazz.colloc.csv.ParseCsvInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import com.mobilejazz.colloc.file.FileUtils
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.json.Json
 import java.io.File
 import java.net.MalformedURLException
 import java.net.URL
@@ -29,7 +33,7 @@ class GoogleTsvEndPointInteractor(
       when (platform) {
         Platform.ANGULAR -> {
           val tsv = downloadTsv(url)
-          generateAngularLocales(tempFolder)
+          generateAngularLocales(tsv, tempFolder)
         }
         else -> {
           collocClassicInteractor(url, tempFolder, platform)
@@ -58,8 +62,18 @@ class GoogleTsvEndPointInteractor(
 
   private suspend fun downloadTsv(link: URL): File = downloadFileInteractor(link, "downloadedTsv.tsv")
 
-  private fun generateAngularLocales(tempFolder: File) {
-    // waiting angular generation
+  private fun generateAngularLocales(csvFile: File, output: File) {
+    val parse = ParseCsvInteractor()
+    val result = parse(csvFile.absolutePath)
+    val json = Json {  }
+    val angularFolder = File(output.absolutePath + "/angular/")
+    angularFolder.mkdirs()
+    for (content in result) {
+      val serializer = MapSerializer(String.serializer(), String.serializer())
+      val languageJson = json.encodeToString(serializer, content.value)
+      val languageFile = File("${angularFolder.absolutePath}/${content.key}.json")
+      languageFile.writeText(languageJson)
+    }
   }
 
   private fun compressFolder(tempFolder: File): File {

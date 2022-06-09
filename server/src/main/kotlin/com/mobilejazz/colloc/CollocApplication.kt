@@ -28,7 +28,7 @@ class CollocApplication {
         val googleTsvEndPointInteractor = GoogleTsvEndPointInteractor()
         val result = googleTsvEndPointInteractor(link, listOf(platform))
 
-        return result?.readBytes()
+        return result.readBytes()
     }
 }
 

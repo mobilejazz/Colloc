@@ -48,11 +48,8 @@ class GoogleTsvEndPointInteractorTest {
     fun `correct link generates a file`() {
         runBlocking {
             val link =
-                "https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=tsv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"
-            val result = (GoogleTsvEndPointInteractor())(
-                link,
-                listOf(Platform.IOS, Platform.ANDROID, Platform.JSON, Platform.ANGULAR)
-            )
+                "https://docs.google.com/a/mobilejazz.com/spreadsheets/d/1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o/export?format=csv&id=1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"
+            val result = GoogleTsvEndPointInteractor()(link, listOf(Platform.ANGULAR))
             assert(result is File)
         }
     }
