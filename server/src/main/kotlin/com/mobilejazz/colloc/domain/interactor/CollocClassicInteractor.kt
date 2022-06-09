@@ -6,6 +6,7 @@ import java.net.URL
 enum class Platform {
     IOS,
     ANDROID,
+    JSON,
 }
 
 class CollocClassicInteractor {
@@ -15,6 +16,7 @@ class CollocClassicInteractor {
         val p = when (platform) {
             Platform.IOS -> "100"
             Platform.ANDROID -> "010"
+            Platform.JSON -> "001"
         }
         val proc = Runtime.getRuntime().exec(arrayOf("php", "colloc.php", url.toString(), outputFolder.toString(), p))
         val status = proc.waitFor()
