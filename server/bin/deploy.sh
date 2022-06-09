@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/sh -e
 # push the image
 docker login --username "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" registry.mobilejazz.com || exit
 DOCKER_IMAGE_TAG="$(git rev-parse --short HEAD)"

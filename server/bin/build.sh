@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/sh -e
 
 # get the commit id for the latest commit in HEAD
 DOCKER_IMAGE_TAG="$(git rev-parse --short HEAD)"
