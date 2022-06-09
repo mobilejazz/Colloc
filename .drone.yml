@@ -43,7 +43,7 @@ steps:
       - echo "$SSH_KNOWN_HOSTS" >~/.ssh/known_hosts
       - chmod 644 ~/.ssh/known_hosts
 
-      - cd server && ls -lah && bin/build.sh && bin/deploy.sh
+      - cd server && ls -lah bin && bin/build.sh && bin/deploy.sh
 
 trigger:
   branch:
