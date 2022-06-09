@@ -8,6 +8,7 @@ class ParseCsvInteractorTest {
 
     @Test
     fun `test if all languages are listed`() {
-        ParseCsvInteractor()("src/test/resources/colloc.csv")
+        val a = ParseCsvInteractor()("src/test/resources/colloc.csv")
+        println(a)
     }
 }
