@@ -1,5 +1,6 @@
 package com.mobilejazz.colloc
 
+import com.mobilejazz.colloc.domain.interactor.GoogleTsvEndPointInteractor
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,7 +18,8 @@ class CollocApplication {
 
     @GetMapping("/google-tsv")
     fun googleTsv(@RequestParam(value = "link", defaultValue = "") link: String?): String {
-        return String.format("TSV download link: %s", link)
+        val result  = (GoogleTsvEndPointInteractor())(link)
+        return String.format("TSV download link: %s", result)
     }
 }
 
