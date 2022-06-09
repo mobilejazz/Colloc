@@ -18,7 +18,7 @@ class GoogleTsvEndPointInteractor(
     class InvalidPlatformException(reason: String) : Exception(reason)
   }
 
-  suspend operator fun invoke(link: String, platforms: List<Platform>): File? {
+  suspend operator fun invoke(link: String, platforms: List<Platform>): File {
     if (platforms.isEmpty()) throw Error.InvalidPlatformException("empty platform list is provided")
     val url = validateLink(link)
 
