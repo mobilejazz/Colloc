@@ -23,20 +23,6 @@ class CollocApplication {
     return "Format to request /google-tsv?platform=*IOS|ANDROID|JSON|ANGULAR*&link=*GOOGLELINK*"
   }
 
-  @GetMapping("/classic")
-  fun classic(
-    @RequestParam(value = "url") url: String?,
-    @RequestParam(value = "platform") platform: String?
-  ): String {
-    val u =
-      URL("https://docs.google.com/spreadsheets/d/13EXpNK62xYm2UiTW-MhNP6eij2GV_vMpmOJNTeYNG7w/export?format=tsv")
-    val p = Platform.IOS
-    val output = File("/tmp/output/")
-    val classic = CollocClassicInteractor()
-    classic.invoke(u, output, p)
-    return "OK"
-  }
-
   @GetMapping(
     value =["/google-tsv"],
     produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
