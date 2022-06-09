@@ -15,10 +15,19 @@ repositories {
 	mavenCentral()
 }
 
+val ktor_version = "2.0.2"
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+	implementation("io.ktor:ktor-client-core:$ktor_version")
+	implementation("io.ktor:ktor-client-okhttp:$ktor_version")
+
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.2")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
