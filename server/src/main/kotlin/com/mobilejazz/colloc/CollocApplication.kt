@@ -7,8 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+
 
 @SpringBootApplication
 @RestController
@@ -32,6 +34,16 @@ class CollocApplication {
         val result = googleTsvEndPointInteractor(link, listOf(platform))
 
         return result.readBytes()
+    }
+
+    @GetMapping("/error")
+    fun error(): String? {
+        return "Error handling"
+    }
+
+    @Override
+    fun getErrorPath(): String? {
+        return "/error"
     }
 }
 
