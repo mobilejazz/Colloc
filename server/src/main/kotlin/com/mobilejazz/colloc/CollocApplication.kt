@@ -5,7 +5,9 @@ import com.mobilejazz.colloc.domain.interactor.GoogleTsvEndPointInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -27,11 +29,16 @@ class CollocApplication {
     suspend fun colloc(
         @RequestParam(value = "id") id: String,
         @RequestParam(value = "platform") platform: Platform,
-    ): ByteArray? {
+    ): ResponseEntity<ByteArray> {
         val googleTsvEndPointInteractor = GoogleTsvEndPointInteractor()
         val result = googleTsvEndPointInteractor(id, listOf(platform))
+        val bytes = result.readBytes()
 
-        return result.readBytes()
+        return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=colloc.zip")
+            .contentType(MediaType("application","zip"))
+            .contentLength(bytes.size.toLong())
+            .body(bytes);
     }
 }
 
