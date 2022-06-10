@@ -22,7 +22,7 @@ class ParseCsvInteractor {
                         }
                     }
                     val translationKey = nextLine[0]
-                    if (rowIndex >= 2 && translationKey.isValid()) {
+                    if (rowIndex >= 2 && translationKey.isValid() && nextLine.isTranslationLine()) {
                         dictionary.entries.forEach {
                             it.value[translationKey] = nextLine[languagePositionMap[it.key]!!]
                         }
@@ -45,4 +45,8 @@ class ParseCsvInteractor {
     }
 
     private fun String.isValid() = !this.contains("#") && isNotBlank()
+
+    private fun Array<String>.isTranslationLine() = drop(1).joinToString(
+            separator = "", prefix = "", postfix = "", limit = -1, truncated = ""
+    ).isNotBlank()
 }

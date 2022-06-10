@@ -1,7 +1,0 @@
-,#,English,#,Spanish,#,Catalan,#
-,Comments,en,Char count,es,Char count,ca,Char count
-#Generic,,,,,,,
-ls_generic_accept,"No tenim la app. No estem segurs si en català seria ""D'acord"" o ""Acceptar"", depèn del context",Ok,2,Aceptar,7,D'acord,7
-ls_generic_cancel,,Cancel,6,Cancelar,8,Cancel·lar,10
-ls_generic_quit,,Quit,4,Salir,5,Sortir,6
-ls_generic_yes,,Yes,3,Sí,2,Sí,2
