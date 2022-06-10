@@ -6,14 +6,16 @@ import com.mobilejazz.colloc.file.FileUtils
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
+import org.springframework.stereotype.Service
 import java.io.File
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.UUID
 
+@Service
 class GoogleTsvEndPointInteractor(
-  val downloadFileInteractor: DownloadFileInteractor = DownloadFileInteractor(),
-  val collocClassicInteractor: CollocClassicInteractor = CollocClassicInteractor(),
+  private val downloadFileInteractor: DownloadFileInteractor,
+  private val collocClassicInteractor: CollocClassicInteractor,
 ) {
   sealed class Error {
     object InvalidURLException : Exception()

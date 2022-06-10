@@ -1,5 +1,8 @@
 package com.mobilejazz.colloc.domain.interactor
 
+import org.springframework.stereotype.Service
+
+@Service
 class FormViewInteractor {
     operator fun invoke(): String {
         var html = """

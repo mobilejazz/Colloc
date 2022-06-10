@@ -7,9 +7,11 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsChannel
 import io.ktor.util.cio.writeChannel
 import io.ktor.utils.io.copyAndClose
+import org.springframework.stereotype.Service
 import java.io.File
 import java.net.URL
 
+@Service
 class DownloadFileInteractor {
     suspend operator fun invoke(url: URL, filename: String): File {
         val client = HttpClient(OkHttp) {

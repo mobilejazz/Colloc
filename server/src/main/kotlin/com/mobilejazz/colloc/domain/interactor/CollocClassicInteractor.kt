@@ -2,9 +2,11 @@ package com.mobilejazz.colloc.domain.interactor
 
 import com.mobilejazz.colloc.domain.error.PlatformNotSupported
 import com.mobilejazz.colloc.domain.model.Platform
+import org.springframework.stereotype.Service
 import java.io.File
 import java.net.URL
 
+@Service
 class CollocClassicInteractor {
     /** Executes the PHP version of Colloc */
     operator fun invoke(id: String, outputFolder: File, platform: Platform) {
