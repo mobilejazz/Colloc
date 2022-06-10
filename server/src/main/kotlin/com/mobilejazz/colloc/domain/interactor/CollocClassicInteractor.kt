@@ -1,4 +1,4 @@
-package com.mobilejazz.colloc.classic
+package com.mobilejazz.colloc.domain.interactor
 
 import com.mobilejazz.colloc.domain.error.PlatformNotSupported
 import com.mobilejazz.colloc.domain.model.Platform
@@ -7,7 +7,8 @@ import java.net.URL
 
 class CollocClassicInteractor {
     /** Executes the PHP version of Colloc */
-    operator fun invoke(url: URL, outputFolder: File, platform: Platform) {
+    operator fun invoke(id: String, outputFolder: File, platform: Platform) {
+        val url = URL("https://docs.google.com/spreadsheets/d/${id}/export?format=tsv")
         // map platform to parameter
         val p = when (platform) {
             Platform.IOS -> "100"

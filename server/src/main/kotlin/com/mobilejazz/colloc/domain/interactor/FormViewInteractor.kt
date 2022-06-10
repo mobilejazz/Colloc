@@ -14,7 +14,7 @@ class FormViewInteractor {
             <h1>Colloc</h1>
             <form action="/colloc" target="_blank" method="get">
             <label for="link">Google Drive ID document</label><br>
-            <input type="text" name="link"><br>
+            <input type="text" name="id"><br>
             <input type="radio" id="radio_android" name="platform" value="ANDROID">
             <label for="radio_android">ANDROID</label><br>
             <input type="radio" id="radio_ios" name="platform" value="IOS">

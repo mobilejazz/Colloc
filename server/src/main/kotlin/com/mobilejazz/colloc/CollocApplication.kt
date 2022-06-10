@@ -25,11 +25,11 @@ class CollocApplication {
         produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
     )
     suspend fun colloc(
-        @RequestParam(value = "link") link: String,
-        @RequestParam(value = "platform") platform: Platform
+        @RequestParam(value = "id") id: String,
+        @RequestParam(value = "platform") platform: Platform,
     ): ByteArray? {
         val googleTsvEndPointInteractor = GoogleTsvEndPointInteractor()
-        val result = googleTsvEndPointInteractor(link, listOf(platform))
+        val result = googleTsvEndPointInteractor(id, listOf(platform))
 
         return result.readBytes()
     }

@@ -1,6 +1,5 @@
 package com.mobilejazz.colloc.domain.interactor
 
-import com.mobilejazz.colloc.classic.CollocClassicInteractor
 import com.mobilejazz.colloc.csv.ParseCsvInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import com.mobilejazz.colloc.file.FileUtils
@@ -21,21 +20,19 @@ class GoogleTsvEndPointInteractor(
     class InvalidPlatformException(reason: String) : Exception(reason)
   }
 
-  suspend operator fun invoke(link: String, platforms: List<Platform>): File {
+  suspend operator fun invoke(id: String, platforms: List<Platform>): File {
     if (platforms.isEmpty()) throw Error.InvalidPlatformException("empty platform list is provided")
-    val url = validateLink(link)
-
-
     val tempFolder = File("/tmp/" + UUID.randomUUID().toString())
 
     for (platform in platforms) {
       when (platform) {
         Platform.ANGULAR -> {
+          val url = URL("https://docs.google.com/spreadsheets/d/${id}/export?format=csv")
           val csv = downloadCsv(url)
           generateAngularLocales(csv, tempFolder)
         }
         else -> {
-          collocClassicInteractor(url, tempFolder, platform)
+          collocClassicInteractor(id, tempFolder, platform)
         }
       }
     }
@@ -44,19 +41,6 @@ class GoogleTsvEndPointInteractor(
     tempFolder.deleteRecursively()
 
     return zip
-  }
-
-  private fun validateLink(link: String): URL {
-    val url = try {
-      URL(link).toURI()
-    } catch (e: MalformedURLException) {
-      throw Error.InvalidURLException
-    }
-
-    if (!url.host.startsWith("docs.google.com") || !url.path.contains("spreadsheets")) {
-      throw Error.InvalidURLException
-    }
-    return url.toURL()
   }
 
   private suspend fun downloadCsv(link: URL): File = downloadFileInteractor(link, "downloaded_google_drive_file.csv")
