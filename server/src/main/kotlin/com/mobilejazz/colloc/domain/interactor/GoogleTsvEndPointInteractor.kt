@@ -16,7 +16,6 @@ class GoogleTsvEndPointInteractor(
   val downloadFileInteractor: DownloadFileInteractor = DownloadFileInteractor(),
   val collocClassicInteractor: CollocClassicInteractor = CollocClassicInteractor(),
 ) {
-
   sealed class Error {
     object InvalidURLException : Exception()
     class InvalidPlatformException(reason: String) : Exception(reason)
@@ -32,8 +31,8 @@ class GoogleTsvEndPointInteractor(
     for (platform in platforms) {
       when (platform) {
         Platform.ANGULAR -> {
-          val tsv = downloadTsv(url)
-          generateAngularLocales(tsv, tempFolder)
+          val csv = downloadCsv(url)
+          generateAngularLocales(csv, tempFolder)
         }
         else -> {
           collocClassicInteractor(url, tempFolder, platform)
@@ -60,7 +59,7 @@ class GoogleTsvEndPointInteractor(
     return url.toURL()
   }
 
-  private suspend fun downloadTsv(link: URL): File = downloadFileInteractor(link, "downloadedTsv.tsv")
+  private suspend fun downloadCsv(link: URL): File = downloadFileInteractor(link, "downloaded_google_drive_file.csv")
 
   private fun generateAngularLocales(csvFile: File, output: File) {
     val parse = ParseCsvInteractor()

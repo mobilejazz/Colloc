@@ -1,5 +1,6 @@
 package com.mobilejazz.colloc
 
+import com.mobilejazz.colloc.domain.interactor.FormViewInteractor
 import com.mobilejazz.colloc.domain.interactor.GoogleTsvEndPointInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController
 class CollocApplication {
     @GetMapping("/")
     suspend fun example(@RequestParam(value = "name", defaultValue = "World") name: String?): String {
-        return "Format to request /colloc?platform=*IOS|ANDROID|JSON|ANGULAR*&link=*GOOGLELINK*"
+        val html = FormViewInteractor()()
+        return html
+//        return "Format to request /colloc?platform=*IOS|ANDROID|JSON|ANGULAR*&link=*GOOGLELINK*"
     }
 
     @GetMapping(
