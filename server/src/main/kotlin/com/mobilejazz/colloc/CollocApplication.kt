@@ -1,7 +1,7 @@
 package com.mobilejazz.colloc
 
 import com.mobilejazz.colloc.domain.interactor.FormViewInteractor
-import com.mobilejazz.colloc.domain.interactor.GoogleTsvEndPointInteractor
+import com.mobilejazz.colloc.domain.interactor.CollocInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @SpringBootApplication
 @RestController
 class CollocApplication(
-    private val collocInteractor: GoogleTsvEndPointInteractor,
+    private val collocInteractor: CollocInteractor,
     private val homeViewInteractor: FormViewInteractor,
 ) {
     @GetMapping("/")
