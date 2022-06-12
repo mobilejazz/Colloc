@@ -13,16 +13,16 @@ import java.net.URL
 
 @Service
 class DownloadFileInteractor {
-    suspend operator fun invoke(url: URL, filename: String): File {
-        val client = HttpClient(OkHttp) {
-            install(HttpTimeout) {
-                requestTimeoutMillis = 60_000
-            }
-        }
-        val file = File("$filename.tsv")
-        val request = client.get(url.toString()) {}
-        val readingChannel = request.bodyAsChannel()
-        readingChannel.copyAndClose(file.writeChannel())
-        return file
+  suspend operator fun invoke(url: URL, filename: String): File {
+    val client = HttpClient(OkHttp) {
+      install(HttpTimeout) {
+        requestTimeoutMillis = 60_000
+      }
     }
+    val file = File("$filename.tsv")
+    val request = client.get(url.toString()) {}
+    val readingChannel = request.bodyAsChannel()
+    readingChannel.copyAndClose(file.writeChannel())
+    return file
+  }
 }

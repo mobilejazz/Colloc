@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class FormViewInteractor {
-    operator fun invoke(): String {
-        var html = """
+  operator fun invoke(): String {
+    var html = """
             <!doctype html>
             <html lang="en">
             <head>
@@ -51,6 +51,6 @@ class FormViewInteractor {
             </html>
         """.trimIndent()
 
-        return html
-    }
+    return html
+  }
 }

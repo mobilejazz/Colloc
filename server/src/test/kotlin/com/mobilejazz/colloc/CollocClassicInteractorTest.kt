@@ -1,32 +1,31 @@
 package com.mobilejazz.colloc
 
-import com.mobilejazz.colloc.domain.interactor.CollocClassicInteractor
 import com.mobilejazz.colloc.domain.error.PlatformNotSupported
+import com.mobilejazz.colloc.domain.interactor.CollocClassicInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.io.File
-import java.net.URL
 
 class CollocClassicInteractorTest {
-    @Test
-    fun `incorrect platforms returns an error`() {
-        assertThrows<PlatformNotSupported> {
-            val id = "13EXpNK62xYm2UiTW-MhNP6eij2GV_vMpmOJNTeYNG7w"
-            val platform = Platform.ANGULAR
-            val output = File("/tmp/output/")
-            (CollocClassicInteractor())(id, output, platform)
-        }
+  @Test
+  fun `incorrect platforms returns an error`() {
+    assertThrows<PlatformNotSupported> {
+      val id = "13EXpNK62xYm2UiTW-MhNP6eij2GV_vMpmOJNTeYNG7w"
+      val platform = Platform.ANGULAR
+      val output = File("/tmp/output/")
+      (CollocClassicInteractor())(id, output, platform)
     }
+  }
 
-    @Test
-    fun `correct link generates a file`() {
-        val id = "13EXpNK62xYm2UiTW-MhNP6eij2GV_vMpmOJNTeYNG7w"
-        val platform = Platform.IOS
-        val output = File("/tmp/output/")
-        val classic = CollocClassicInteractor()
-        classic(id, output, platform)
-        assert(output.length() > 0)
-        output.deleteRecursively()
-    }
+  @Test
+  fun `correct link generates a file`() {
+    val id = "13EXpNK62xYm2UiTW-MhNP6eij2GV_vMpmOJNTeYNG7w"
+    val platform = Platform.IOS
+    val output = File("/tmp/output/")
+    val classic = CollocClassicInteractor()
+    classic(id, output, platform)
+    assert(output.length() > 0)
+    output.deleteRecursively()
+  }
 }

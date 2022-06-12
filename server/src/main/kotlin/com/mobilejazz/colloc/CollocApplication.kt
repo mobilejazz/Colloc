@@ -1,7 +1,7 @@
 package com.mobilejazz.colloc
 
-import com.mobilejazz.colloc.domain.interactor.FormViewInteractor
 import com.mobilejazz.colloc.domain.interactor.CollocInteractor
+import com.mobilejazz.colloc.domain.interactor.FormViewInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -15,34 +15,34 @@ import org.springframework.web.bind.annotation.RestController
 @SpringBootApplication
 @RestController
 class CollocApplication(
-    private val collocInteractor: CollocInteractor,
-    private val homeViewInteractor: FormViewInteractor,
+  private val collocInteractor: CollocInteractor,
+  private val homeViewInteractor: FormViewInteractor,
 ) {
-    @GetMapping("/")
-    suspend fun home(): String {
-        val html = homeViewInteractor()
-        return html
-    }
+  @GetMapping("/")
+  suspend fun home(): String {
+    val html = homeViewInteractor()
+    return html
+  }
 
-    @GetMapping(
-        value = ["/colloc"],
-        produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
-    )
-    suspend fun colloc(
-        @RequestParam(value = "id") id: String,
-        @RequestParam(value = "platform") platform: Platform,
-    ): ResponseEntity<ByteArray> {
-        val result = collocInteractor(id, listOf(platform))
-        val bytes = result.readBytes()
+  @GetMapping(
+    value = ["/colloc"],
+    produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
+  )
+  suspend fun colloc(
+    @RequestParam(value = "id") id: String,
+    @RequestParam(value = "platform") platform: Platform,
+  ): ResponseEntity<ByteArray> {
+    val result = collocInteractor(id, listOf(platform))
+    val bytes = result.readBytes()
 
-        return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=colloc.zip")
-            .contentType(MediaType("application","zip"))
-            .contentLength(bytes.size.toLong())
-            .body(bytes);
-    }
+    return ResponseEntity.ok()
+      .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=colloc.zip")
+      .contentType(MediaType("application", "zip"))
+      .contentLength(bytes.size.toLong())
+      .body(bytes);
+  }
 }
 
 fun main(args: Array<String>) {
-    runApplication<CollocApplication>(*args)
+  runApplication<CollocApplication>(*args)
 }

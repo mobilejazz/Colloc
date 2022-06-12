@@ -17,7 +17,9 @@ build/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-.idea
+/.idea/workspace.xml
+/.idea/sonarlint
+/.idea/csv-plugin.xml
 *.iws
 *.iml
 *.ipr
