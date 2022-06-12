@@ -4,7 +4,6 @@ import com.opencsv.CSVReader
 import java.io.FileReader
 import java.nio.charset.StandardCharsets
 
-
 class ParseCsvInteractor {
   operator fun invoke(filePath: String): Map<String, Map<String, String>> {
     val dictionary = mutableMapOf<String, MutableMap<String, String>>()
