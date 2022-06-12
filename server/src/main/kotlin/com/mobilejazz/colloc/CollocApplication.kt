@@ -1,27 +1,24 @@
 package com.mobilejazz.colloc
 
 import com.mobilejazz.colloc.domain.interactor.CollocInteractor
-import com.mobilejazz.colloc.domain.interactor.FormViewInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
 
 @SpringBootApplication
-@RestController
+@Controller
 class CollocApplication(
   private val collocInteractor: CollocInteractor,
-  private val homeViewInteractor: FormViewInteractor,
 ) {
   @GetMapping("/")
   suspend fun home(): String {
-    val html = homeViewInteractor()
-    return html
+    return "home"
   }
 
   @GetMapping(
