@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:experimental
-FROM openjdk:18-jdk-alpine as build
+FROM --platform=linux/amd64 openjdk:18-jdk-alpine as build
 WORKDIR /workspace/app
 COPY . /workspace/app
 RUN --mount=type=cache,target=/root/.gradle \
     ./gradlew bootJar && \
     mv build/libs/colloc-*.jar app.jar
 
-FROM openjdk:18-jdk-alpine
+FROM --platform=linux/amd64 openjdk:18-jdk-alpine
 RUN apk add --update-cache \
     ca-certificates \
     php7 \
