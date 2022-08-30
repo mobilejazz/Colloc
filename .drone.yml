@@ -47,7 +47,7 @@ steps:
 
 trigger:
   branch:
-    - feature/new-new-colloc
+    - master
   event:
     - push
 
