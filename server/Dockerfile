@@ -17,4 +17,4 @@ RUN apk add --update-cache \
 VOLUME /tmp
 RUN wget https://raw.githubusercontent.com/mobilejazz/Colloc/master/colloc.php
 COPY --from=build /workspace/app/app.jar .
-ENTRYPOINT ["java","-jar","app.jar --spring.profiles.active=production"]
+ENTRYPOINT ["java","-jar","app.jar"]
