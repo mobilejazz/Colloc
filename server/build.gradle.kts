@@ -15,24 +15,25 @@ repositories {
   mavenCentral()
 }
 
-val ktor_version = "2.0.2"
+val ktorVersion = "2.1.0"
 
 dependencies {
-  //	Srping Boot
+  //	Spring Boot
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
   implementation("org.springframework.boot:spring-boot-devtools")
+  implementation("org.springframework.boot:spring-boot-configuration-processor")
+  implementation("org.springframework.boot:spring-boot-starter-actuator")
 
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-  implementation("io.ktor:ktor-client-core:$ktor_version")
-  implementation("io.ktor:ktor-client-okhttp:$ktor_version")
+  implementation("io.ktor:ktor-client-core:$ktorVersion")
+  implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.2")
-
-  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.4")
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
 
   implementation("com.opencsv:opencsv:5.6")
 

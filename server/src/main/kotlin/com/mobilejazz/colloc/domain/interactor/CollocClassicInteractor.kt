@@ -2,12 +2,11 @@ package com.mobilejazz.colloc.domain.interactor
 
 import com.mobilejazz.colloc.domain.error.PlatformNotSupported
 import com.mobilejazz.colloc.domain.model.Platform
-import org.springframework.stereotype.Service
 import java.io.File
 import java.net.URL
 
-@Service
-class CollocClassicInteractor {
+class CollocClassicInteractor(private val collocScriptPath: String) {
+
   /** Executes the PHP version of Colloc */
   operator fun invoke(id: String, outputFolder: File, platform: Platform) {
     val url = URL("https://docs.google.com/spreadsheets/d/${id}/export?format=tsv")
@@ -18,7 +17,8 @@ class CollocClassicInteractor {
       Platform.JSON -> "001"
       Platform.ANGULAR -> throw PlatformNotSupported("Angular platform is not supported")
     }
-    val proc = Runtime.getRuntime().exec(arrayOf("php", "colloc.php", url.toString(), outputFolder.toString(), p))
+
+    val proc = Runtime.getRuntime().exec(arrayOf("php", collocScriptPath, url.toString(), outputFolder.toString(), p))
     val status = proc.waitFor()
     if (status != 0)
       throw Exception("Failed to run Colloc: $status")

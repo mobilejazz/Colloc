@@ -1,17 +1,14 @@
 package com.mobilejazz.colloc.domain.interactor
 
-import com.mobilejazz.colloc.csv.ParseCsvInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import com.mobilejazz.colloc.file.FileUtils
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
-import org.springframework.stereotype.Service
 import java.io.File
 import java.net.URL
 import java.util.UUID
 
-@Service
 class CollocInteractor(
   private val downloadFileInteractor: DownloadFileInteractor,
   private val collocClassicInteractor: CollocClassicInteractor,

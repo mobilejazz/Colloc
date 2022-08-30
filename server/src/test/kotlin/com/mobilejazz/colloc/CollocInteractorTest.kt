@@ -13,7 +13,7 @@ class CollocInteractorTest {
   private fun getInteractor(): CollocInteractor {
     return CollocInteractor(
       DownloadFileInteractor(),
-      CollocClassicInteractor(),
+      CollocClassicInteractor("/temp"),
     )
   }
 
@@ -31,7 +31,7 @@ class CollocInteractorTest {
     runBlocking {
       val id = "1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"
       val result = getInteractor()(id, listOf(Platform.ANGULAR))
-      assert(result is File)
+      assert(result.length() > 0)
     }
   }
 

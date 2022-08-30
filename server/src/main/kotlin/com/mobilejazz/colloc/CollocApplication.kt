@@ -2,6 +2,7 @@ package com.mobilejazz.colloc
 
 import com.mobilejazz.colloc.domain.interactor.CollocInteractor
 import com.mobilejazz.colloc.domain.model.Platform
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.http.HttpHeaders
@@ -12,10 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 
 @SpringBootApplication
+class CollocApplication
+
 @Controller
-class CollocApplication(
-  private val collocInteractor: CollocInteractor,
-) {
+class CollocController {
+
+  @Autowired
+  lateinit var collocInteractor: CollocInteractor
+
   @GetMapping("/")
   suspend fun home(): String {
     return "home"
@@ -28,7 +33,7 @@ class CollocApplication(
   suspend fun colloc(
     @RequestParam(value = "id") id: String,
     @RequestParam(value = "platform") platform: Platform,
-  ): ResponseEntity<ByteArray> {
+  ): ResponseEntity<ByteArray>? {
     val result = collocInteractor(id, listOf(platform))
     val bytes = result.readBytes()
 
@@ -36,7 +41,7 @@ class CollocApplication(
       .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=colloc.zip")
       .contentType(MediaType("application", "zip"))
       .contentLength(bytes.size.toLong())
-      .body(bytes);
+      .body(bytes)
   }
 }
 

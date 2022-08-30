@@ -1,4 +1,4 @@
-package com.mobilejazz.colloc.csv
+package com.mobilejazz.colloc.domain.interactor
 
 import com.opencsv.CSVReader
 import java.io.FileReader
