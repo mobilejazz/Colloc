@@ -1,0 +1,38 @@
+services:
+  traefik:
+    image: traefik:2.7
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    command:
+      # API Settings - https://docs.traefik.io/operations/api/
+      - --api.debug=false
+      # Log Settings - https://docs.traefik.io/observability/logs/
+      - --log.level=DEBUG
+      # Provider Settings - https://docs.traefik.io/providers/docker/#provider-configuration
+      - --providers.docker.endpoint=unix:///var/run/docker.sock
+      - --providers.docker.watch=true
+      - --providers.docker.exposedbydefault=false
+      # Entrypoints Settings - https://docs.traefik.io/routing/entrypoints/#configuration
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      # Certificate Settings (Let's Encrypt) -  https://docs.traefik.io/https/acme/#configuration-examples
+      - --certificatesresolvers.defaultResolver.acme.email=devops@mobilejazz.com
+      - --certificatesresolvers.defaultResolver.acme.httpChallenge.entryPoint=web
+      - --certificatesresolvers.defaultResolver.acme.storage=/ssl/acme.json
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./ssl-certificates:/ssl
+
+  colloc:
+    image: registry.mobilejazz.com/colloc/server:$COLLOC_VERSION
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.colloc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.colloc-secure.tls=true"
+      - "traefik.http.routers.colloc-secure.entrypoints=websecure"
+      - "traefik.http.routers.colloc-secure.rule=Host(`colloc.mobilejazz.dev`)"

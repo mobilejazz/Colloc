@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colloc | Online tool to generate Localization Android, iOS and JSON files</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+<div class="container header mt-4">
+    <div class="row">
+        <div class="col">
+            <h1>Colloc</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <form action="/colloc" target="_blank" method="get">
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label" for="id">Google Drive ID document</label>
+                    <input class="form-control" aria-describedby="GoogleIdBlock" type="text" id="id" name="id" required>
+                    <div id="GoogleIdBlock" class="form-text">
+                        Copy the ID from the URL of a Google Spreadsheet Colloc Format. Ex. https://docs.google.com/a/organization/spreadsheets/d/*ID*
+                    </div>
+                </div>
+            </div>
+            <div class="col mt-3">
+                <div class="btn-group-vertical" role="group" aria-label="Select Platform">
+                    <input class="btn-check" type="radio" id="radio_android" name="platform" value="ANDROID" autocomplete="off" required>
+                    <label class="btn btn-outline-secondary" for="radio_android">ANDROID</label>
+                    <input class="btn-check" type="radio" id="radio_ios" name="platform" value="IOS" autocomplete="off" required>
+                    <label class="btn btn-outline-secondary" for="radio_ios">IOS</label>
+                    <input class="btn-check" type="radio" id="radio_json" name="platform" value="JSON" autocomplete="off" required>
+                    <label class="btn btn-outline-secondary" for="radio_json">JSON</label>
+                    <input class="btn-check" type="radio" id="radio_angular" name="platform" value="ANGULAR" autocomplete="off" required>
+                    <label class="btn btn-outline-secondary" for="radio_angular">ANGULAR</label>
+                </div>
+            </div>
+            <div class="col mt-3">
+                <input type="submit" class="btn btn-dark btn-lg">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <p class="fs-6 fw-light font-monospace">
+                Copyright 2022 ©
+                <a class="text-reset" target="_blank" href="https://www.mobilejazz.com">Mobile Jazz</a>
+                | <a class="text-reset" target="_blank" href="https://github.com/mobilejazz/Colloc">GitHub</a>
+            </p>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>
