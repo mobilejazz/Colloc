@@ -1,19 +1,20 @@
 # syntax=docker/dockerfile:experimental
-FROM --platform=linux/amd64 openjdk:18-jdk-alpine as build
+FROM openjdk:18-jdk-bullseye as build
 WORKDIR /workspace/app
 COPY . /workspace/app
 RUN --mount=type=cache,target=/root/.gradle \
     ./gradlew bootJar && \
     mv build/libs/colloc-*.jar app.jar
 
-FROM --platform=linux/amd64 openjdk:18-jdk-alpine
-RUN apk add --update-cache \
+FROM openjdk:18-jdk-bullseye
+RUN apt update && apt upgrade -y && apt install -y \
     ca-certificates \
-    php7 \
-    php7-curl \
-    php7-openssl \
-    php7-mbstring \
-    && rm -rf /var/cache/apk/*
+    php7.4 \
+    php7.4-curl \
+    php7.4-mbstring \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 VOLUME /tmp
 RUN wget https://raw.githubusercontent.com/mobilejazz/Colloc/master/colloc.php
 COPY --from=build /workspace/app/app.jar .
