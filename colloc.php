@@ -234,6 +234,7 @@ function androidLineParse($key, $localizedString)
     $localizedString = str_replace("&", "&amp;", $localizedString);
     $localizedString = str_replace("<", "&lt;", $localizedString);
     $localizedString = str_replace(">", "&gt;", $localizedString);
+    $localizedString = str_replace('"', '\"', $localizedString);
 
     // Add more rules here.
 
