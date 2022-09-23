@@ -37,7 +37,8 @@ out/
 ### VS Code ###
 .vscode/
 
-### Geneerated Files ###
+### Generated Files ###
+/*.csv
 /*.tsv
 
 # project specific

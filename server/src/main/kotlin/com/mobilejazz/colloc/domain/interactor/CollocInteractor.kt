@@ -1,10 +1,10 @@
 package com.mobilejazz.colloc.domain.interactor
 
 import com.mobilejazz.colloc.domain.model.Platform
-import com.mobilejazz.colloc.file.FileUtils
-import kotlinx.serialization.builtins.MapSerializer
-import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.Json
+import com.mobilejazz.colloc.feature.decoder.LocalizationDecoder
+import com.mobilejazz.colloc.ext.createFile
+import com.mobilejazz.colloc.ext.generateZip
+import com.mobilejazz.colloc.ext.toFullImportedFileURL
 import java.io.File
 import java.net.URL
 import java.util.UUID
@@ -12,6 +12,8 @@ import java.util.UUID
 class CollocInteractor(
   private val downloadFileInteractor: DownloadFileInteractor,
   private val collocClassicInteractor: CollocClassicInteractor,
+  private val localizationDecoder: LocalizationDecoder,
+  private val platformEncodeInteractorMap: Map<Platform, EncodeLocalizationInteractor>
 ) {
   sealed class Error {
     class InvalidIdException(reason: String) : Exception(reason)
@@ -26,14 +28,10 @@ class CollocInteractor(
 
     for (platform in platforms) {
       when (platform) {
-        Platform.ANGULAR -> {
-          val url = URL("https://docs.google.com/spreadsheets/d/${id}/export?format=csv")
-          val csv = downloadCsv(url)
-          generateAngularLocales(csv, tempFolder)
-        }
-        else -> {
-          collocClassicInteractor(id, tempFolder, platform)
-        }
+        Platform.ANGULAR,
+        Platform.ANDROID -> platform.generateLocales(id, tempFolder)
+
+        else -> collocClassicInteractor(id, tempFolder, platform)
       }
     }
 
@@ -43,25 +41,20 @@ class CollocInteractor(
     return zip
   }
 
-  private suspend fun downloadCsv(link: URL): File = downloadFileInteractor(link, "downloaded_google_drive_file.csv")
-
-  private fun generateAngularLocales(csvFile: File, output: File) {
-    val parse = ParseCsvInteractor()
-    val result = parse(csvFile.absolutePath)
-    val json = Json { }
-    val angularFolder = File(output.absolutePath + "/angular/")
-    angularFolder.mkdirs()
-    for (content in result) {
-      val serializer = MapSerializer(String.serializer(), String.serializer())
-      val languageJson = json.encodeToString(serializer, content.value)
-      val languageFile = File("${angularFolder.absolutePath}/${content.key}.json")
-      languageFile.writeText(languageJson)
-    }
+  private suspend fun Platform.generateLocales(id: String, outputDirectory: File) {
+    val csvFile = downloadCsv(id.toFullImportedFileURL())
+    val dictionary = localizationDecoder.decode(csvFile.absolutePath)
+    platformEncodeInteractorMap.getValue(this).invoke(outputDirectory, dictionary)
   }
 
+  private suspend fun downloadCsv(link: URL): File = downloadFileInteractor(
+    link,
+    File("downloaded_google_drive_file.csv").createFile()
+  )
+
   private fun compressFolder(tempFolder: File): File {
-    val zippedFile = FileUtils.createFile("/tmp/", UUID.randomUUID().toString() + ".zip")
-    FileUtils.generateZip(tempFolder, zippedFile)
+    val zippedFile = File("/tmp/${UUID.randomUUID()}.zip").createFile()
+    tempFolder.generateZip(zippedFile)
     return zippedFile
   }
 }

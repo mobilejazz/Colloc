@@ -38,6 +38,7 @@ dependencies {
   implementation("com.opencsv:opencsv:5.6")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
+  testImplementation("io.mockk:mockk:1.12.8")
 }
 
 tasks.withType<KotlinCompile> {
