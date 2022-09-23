@@ -3,8 +3,8 @@ package com.mobilejazz.colloc
 import com.mobilejazz.colloc.domain.error.PlatformNotSupported
 import com.mobilejazz.colloc.domain.interactor.CollocClassicInteractor
 import com.mobilejazz.colloc.domain.model.Platform
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import java.io.File
 
