@@ -34,7 +34,7 @@ class CollocController {
     @RequestParam(value = "id") id: String,
     @RequestParam(value = "platform") platform: Platform,
   ): ResponseEntity<ByteArray>? {
-    val result = collocInteractor(id, listOf(platform))
+    val result = collocInteractor(id, platform)
     val bytes = result.readBytes()
 
     return ResponseEntity.ok()

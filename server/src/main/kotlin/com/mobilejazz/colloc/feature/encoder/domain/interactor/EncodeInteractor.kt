@@ -15,4 +15,6 @@ abstract class EncodeInteractor {
       .createFile()
       .writeText(content)
   }
+
+  protected fun String.isComment() = startsWith("#")
 }
