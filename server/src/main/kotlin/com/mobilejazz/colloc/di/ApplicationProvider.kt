@@ -1,6 +1,5 @@
 package com.mobilejazz.colloc.di
 
-import com.mobilejazz.colloc.domain.interactor.CollocClassicInteractor
 import com.mobilejazz.colloc.domain.interactor.CollocInteractor
 import com.mobilejazz.colloc.domain.interactor.DownloadFileInteractor
 import com.mobilejazz.colloc.domain.model.Platform
@@ -10,6 +9,7 @@ import com.mobilejazz.colloc.feature.encoder.domain.interactor.AndroidEncodeInte
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.AngularEncodeInteractor
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.EncodeInteractor
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.IosEncodeInteractor
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.JsonEncodeInteractor
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -24,33 +24,14 @@ import java.io.File
 @Configuration
 class ApplicationModule {
 
-  @Autowired
-  lateinit var enviroment: Environment
-
-  private val collocScriptPath by lazy {
-    val filename = "colloc.php"
-    if (enviroment.isLocal()) {
-      val projectDir = System.getProperty("user.dir") // pointing to /server folder
-      val collocFolder = File(projectDir).parent // pointing to /Colloc folder
-      "$collocFolder/$filename"
-    } else {
-      filename
-    }
-  }
-
-  @Bean
-  fun provideCollocClassicInteractor() = CollocClassicInteractor(collocScriptPath)
-
   @Bean
   fun provideCollocInteractor(
     downloadFileInteractor: DownloadFileInteractor,
-    collocClassicInteractor: CollocClassicInteractor,
     localizationDecoder: LocalizationDecoder,
     platformCollocInteractorMap: Map<Platform, EncodeInteractor>
   ) =
     CollocInteractor(
       downloadFileInteractor,
-      collocClassicInteractor,
       localizationDecoder,
       platformCollocInteractorMap
     )
@@ -73,12 +54,11 @@ class ApplicationModule {
   fun providePlatformEncodeInteractorMap(json: Json) = mapOf(
     Platform.ANDROID to AndroidEncodeInteractor(),
     Platform.IOS to IosEncodeInteractor(),
-    Platform.ANGULAR to AngularEncodeInteractor(json)
+    Platform.ANGULAR to AngularEncodeInteractor(json),
+    Platform.JSON to JsonEncodeInteractor(json)
   )
 
   @Bean
-  fun provideJson() = Json { }
-
-  private fun Environment.isLocal() = activeProfiles.first().contains("local")
+  fun provideJson() = Json { prettyPrint = true }
 }
 

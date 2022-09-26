@@ -73,7 +73,5 @@ class IosEncodeInteractor : EncodeInteractor() {
 
   private fun String.encodeSwiftLine() = "\n\tcase $this"
 
-  private fun String.isComment() = startsWith("#")
-
   private fun localizationFileName(language: Language): String = "${language.code}.lproj/Localizable.strings"
 }
