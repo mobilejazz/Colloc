@@ -1,24 +1,25 @@
-package com.mobilejazz.colloc.feature.encoder
+package com.mobilejazz.colloc.feature.encoder.domain.interactor
 
 import com.mobilejazz.colloc.domain.model.Dictionary
 import com.mobilejazz.colloc.domain.model.Language
 import com.mobilejazz.colloc.ext.encodeAndroidLiterals
+import java.io.File
 
-class AndroidLocalizationEncoder : LocalizationEncoder {
-  override fun encodeContent(dictionary: Dictionary): Map<Language, String> =
-    dictionary
-      .mapValues {
-        it.value.encode()
-      }
+class AndroidEncodeInteractor : EncodeInteractor() {
+  override fun invoke(outputDirectory: File, dictionary: Dictionary) {
+    dictionary.forEach {
+      writeContent(content = it.value.encode(), outputDirectory, outputFileName = localizationFileName(it.key))
+    }
+  }
 
-  override fun encodeLocalizationFileName(language: Language): String = "values${language.encodeLanguageCode()}/strings.xml"
+  private fun localizationFileName(language: Language): String = "values${language.encodeLanguageCode()}/strings.xml"
 
   private fun Map<String, String>.encode(): String =
     buildString {
-      append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
-      append("<resources>\n\n")
       append(
-        "\t<!--This is an automatically generated file. Please don't modify it.-->\r\n"
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+          "\n<resources>\n\n" +
+          "\t<!--$DO_NOT_MODIFY_LINE-->\r\n"
       )
       appendTranslations(translation = this@encode)
       append("\n</resources>")

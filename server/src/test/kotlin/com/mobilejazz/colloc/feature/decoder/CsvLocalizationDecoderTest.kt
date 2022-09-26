@@ -25,18 +25,18 @@ internal class CsvLocalizationDecoderTest {
   @Test
   fun `assert csv decoder returns correct decoded localization`() {
     val englishTranslation = mapOf(
-      "#Generic_1"          to "        ",
+      "#Generic_1" to "        ",
       "ls_generic_accept_1" to "Ok      ",
       "ls_generic_cancel_1" to "Cancel  ",
-      "#Generic_2"          to "        ",
+      "#Generic_2" to "        ",
       "ls_generic_accept_2" to "Ok      ",
       "ls_generic_cancel_2" to "Cancel  "
     )
     val spanishTranslation = mapOf(
-      "#Generic_1"          to "          ",
+      "#Generic_1" to "          ",
       "ls_generic_accept_1" to "Aceptar   ",
       "ls_generic_cancel_1" to "Cancelar  ",
-      "#Generic_2"          to "          ",
+      "#Generic_2" to "          ",
       "ls_generic_accept_2" to "Aceptar   ",
       "ls_generic_cancel_2" to "Cancelar    "
     )

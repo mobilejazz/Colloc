@@ -3,11 +3,10 @@ package com.mobilejazz.colloc
 import com.mobilejazz.colloc.domain.interactor.CollocClassicInteractor
 import com.mobilejazz.colloc.domain.interactor.CollocInteractor
 import com.mobilejazz.colloc.domain.interactor.DownloadFileInteractor
-import com.mobilejazz.colloc.domain.interactor.EncodeLocalizationInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import com.mobilejazz.colloc.feature.decoder.CsvLocalizationDecoder
-import com.mobilejazz.colloc.feature.encoder.AndroidLocalizationEncoder
-import com.mobilejazz.colloc.feature.encoder.AngularLocalizationEncoder
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.AndroidEncodeInteractor
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.AngularEncodeInteractor
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -31,7 +30,7 @@ class CollocInteractorTest {
   fun `correct id generates a file`() {
     runBlocking {
       val id = "1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"
-      val result = getInteractor()(id, listOf(Platform.ANGULAR, Platform.ANDROID))
+      val result = getInteractor()(id, listOf(Platform.ANGULAR, Platform.IOS, Platform.ANDROID))
       assert(result.length() > 0)
     }
   }
@@ -46,8 +45,9 @@ class CollocInteractorTest {
   }
 
   private fun provideLocalizationEncodetMap() = mapOf(
-    Platform.ANDROID to EncodeLocalizationInteractor(AndroidLocalizationEncoder()),
-    Platform.ANGULAR to EncodeLocalizationInteractor(AngularLocalizationEncoder(Json { }))
+    Platform.ANDROID to AndroidEncodeInteractor(),
+    Platform.IOS to AndroidEncodeInteractor(),
+    Platform.ANGULAR to AngularEncodeInteractor(Json { })
   )
 
   private val httpClient =
