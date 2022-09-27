@@ -1,10 +1,11 @@
 package com.mobilejazz.colloc.domain.interactor
 
 import com.mobilejazz.colloc.domain.model.Platform
-import com.mobilejazz.colloc.feature.decoder.LocalizationDecoder
 import com.mobilejazz.colloc.ext.createFile
 import com.mobilejazz.colloc.ext.generateZip
 import com.mobilejazz.colloc.ext.toFullImportedFileURL
+import com.mobilejazz.colloc.feature.decoder.LocalizationDecoder
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.EncodeInteractor
 import java.io.File
 import java.net.URL
 import java.util.UUID
@@ -13,7 +14,7 @@ class CollocInteractor(
   private val downloadFileInteractor: DownloadFileInteractor,
   private val collocClassicInteractor: CollocClassicInteractor,
   private val localizationDecoder: LocalizationDecoder,
-  private val platformEncodeInteractorMap: Map<Platform, EncodeLocalizationInteractor>
+  private val platformEncodeInteractorMap: Map<Platform, EncodeInteractor>
 ) {
   sealed class Error {
     class InvalidIdException(reason: String) : Exception(reason)
@@ -28,8 +29,10 @@ class CollocInteractor(
 
     for (platform in platforms) {
       when (platform) {
-        Platform.ANGULAR,
-        Platform.ANDROID -> platform.generateLocales(id, tempFolder)
+        Platform.ANDROID,
+        Platform.IOS,
+        Platform.ANGULAR -> platform.generateLocales(id, tempFolder)
+
 
         else -> collocClassicInteractor(id, tempFolder, platform)
       }

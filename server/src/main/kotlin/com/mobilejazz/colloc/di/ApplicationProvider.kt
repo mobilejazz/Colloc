@@ -3,12 +3,13 @@ package com.mobilejazz.colloc.di
 import com.mobilejazz.colloc.domain.interactor.CollocClassicInteractor
 import com.mobilejazz.colloc.domain.interactor.CollocInteractor
 import com.mobilejazz.colloc.domain.interactor.DownloadFileInteractor
-import com.mobilejazz.colloc.domain.interactor.EncodeLocalizationInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import com.mobilejazz.colloc.feature.decoder.CsvLocalizationDecoder
 import com.mobilejazz.colloc.feature.decoder.LocalizationDecoder
-import com.mobilejazz.colloc.feature.encoder.AndroidLocalizationEncoder
-import com.mobilejazz.colloc.feature.encoder.AngularLocalizationEncoder
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.AndroidEncodeInteractor
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.AngularEncodeInteractor
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.EncodeInteractor
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.IosEncodeInteractor
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -45,7 +46,7 @@ class ApplicationModule {
     downloadFileInteractor: DownloadFileInteractor,
     collocClassicInteractor: CollocClassicInteractor,
     localizationDecoder: LocalizationDecoder,
-    platformCollocInteractorMap: Map<Platform, EncodeLocalizationInteractor>
+    platformCollocInteractorMap: Map<Platform, EncodeInteractor>
   ) =
     CollocInteractor(
       downloadFileInteractor,
@@ -69,16 +70,14 @@ class ApplicationModule {
   fun provideLocalizationDecoder() = CsvLocalizationDecoder()
 
   @Bean
-  fun providePlatformCollocInteractorMap(json: Json) = mapOf(
-    Platform.ANDROID to EncodeLocalizationInteractor(AndroidLocalizationEncoder()),
-    Platform.ANGULAR to EncodeLocalizationInteractor(AngularLocalizationEncoder(json))
+  fun providePlatformEncodeInteractorMap(json: Json) = mapOf(
+    Platform.ANDROID to AndroidEncodeInteractor(),
+    Platform.IOS to IosEncodeInteractor(),
+    Platform.ANGULAR to AngularEncodeInteractor(json)
   )
 
   @Bean
   fun provideJson() = Json { }
-
-  @Bean
-  fun provideAndroidLocalizationEncoder() = AndroidLocalizationEncoder()
 
   private fun Environment.isLocal() = activeProfiles.first().contains("local")
 }
