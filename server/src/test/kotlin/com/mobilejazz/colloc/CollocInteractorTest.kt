@@ -1,12 +1,12 @@
 package com.mobilejazz.colloc
 
-import com.mobilejazz.colloc.domain.interactor.CollocClassicInteractor
 import com.mobilejazz.colloc.domain.interactor.CollocInteractor
 import com.mobilejazz.colloc.domain.interactor.DownloadFileInteractor
 import com.mobilejazz.colloc.domain.model.Platform
 import com.mobilejazz.colloc.feature.decoder.CsvLocalizationDecoder
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.AndroidEncodeInteractor
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.AngularEncodeInteractor
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.JsonEncodeInteractor
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -20,8 +20,9 @@ class CollocInteractorTest {
   @Test
   fun `no id returns null`() {
     runBlocking {
+      val platform = Platform.values().random()
       assertThrows<CollocInteractor.Error.InvalidIdException> {
-        getInteractor()("", listOf(Platform.IOS))
+        getInteractor()("", platform)
       }
     }
   }
@@ -29,25 +30,18 @@ class CollocInteractorTest {
   @Test
   fun `correct id generates a file`() {
     runBlocking {
+      val platform = Platform.values().random()
       val id = "1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"
-      val result = getInteractor()(id, listOf(Platform.ANGULAR, Platform.IOS, Platform.ANDROID))
+      val result = getInteractor()(id, platform)
       assert(result.length() > 0)
-    }
-  }
-
-  @Test
-  fun `no platforms returns an error`() {
-    runBlocking {
-      assertThrows<CollocInteractor.Error.InvalidPlatformException> {
-        getInteractor()("some random string", listOf())
-      }
     }
   }
 
   private fun provideLocalizationEncodetMap() = mapOf(
     Platform.ANDROID to AndroidEncodeInteractor(),
     Platform.IOS to AndroidEncodeInteractor(),
-    Platform.ANGULAR to AngularEncodeInteractor(Json { })
+    Platform.ANGULAR to AngularEncodeInteractor(Json { }),
+    Platform.JSON to JsonEncodeInteractor(Json { })
   )
 
   private val httpClient =
@@ -60,7 +54,6 @@ class CollocInteractorTest {
   private fun getInteractor(): CollocInteractor {
     return CollocInteractor(
       DownloadFileInteractor(httpClient),
-      CollocClassicInteractor("/temp"),
       CsvLocalizationDecoder(),
       provideLocalizationEncodetMap()
     )
