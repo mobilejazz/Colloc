@@ -46,6 +46,4 @@ class AndroidEncodeInteractor : EncodeInteractor() {
     "\t<string name=\"$key\">${value.encodeAndroidLiterals()}</string>"
 
   private fun String.encodeCommentLine(): String = "\t<!--$this-->"
-
-  private fun String.isComment() = startsWith("#")
 }
