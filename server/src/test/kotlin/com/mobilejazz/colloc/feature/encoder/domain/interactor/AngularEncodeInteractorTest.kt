@@ -1,7 +1,7 @@
 package com.mobilejazz.colloc.feature.encoder.domain.interactor
 
 import com.mobilejazz.colloc.domain.model.Language
-import com.mobilejazz.colloc.feature.encoder.domain.interactor.AngularEncodeInteractor
+import com.mobilejazz.colloc.ext.toJsonElement
 import com.mobilejazz.colloc.randomString
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -33,12 +33,15 @@ internal class AngularEncodeInteractorTest {
     val expectedTranslation = randomString()
     val rawTranslation = anyTranslation()
     val dictionary = mapOf(language to rawTranslation)
-    every { json.encodeToString(any(), rawTranslation) } returns expectedTranslation
+    val translationHierarchy = rawTranslation.mapValues {
+      it.value.toJsonElement()
+    }
+    every { json.encodeToString(any(), translationHierarchy) } returns expectedTranslation
 
     givenEncodeInteractor()(localizationDirectory, dictionary)
 
-    verify(exactly = 1) { json.encodeToString(any(), rawTranslation) }
-    val actualTranslation = File(localizationDirectory, "angular/${language.name}.json").readText()
+    verify(exactly = 1) { json.encodeToString(any(), translationHierarchy) }
+    val actualTranslation = File(localizationDirectory, "angular/${language.code}.json").readText()
     assertEquals(expectedTranslation, actualTranslation)
   }
 
