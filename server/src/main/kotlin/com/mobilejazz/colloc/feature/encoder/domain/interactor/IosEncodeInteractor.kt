@@ -5,19 +5,21 @@ import com.mobilejazz.colloc.domain.model.Language
 import com.mobilejazz.colloc.ext.encodeIOSLiterals
 import java.io.File
 
-internal const val IOS_DO_NOT_MODIFY_LINE =
+const val IOS_DO_NOT_MODIFY_LINE =
   "///" +
     "\n//$DO_NOT_MODIFY_LINE" +
     "\n///\n"
 
 class IosEncodeInteractor : EncodeInteractor() {
 
-  private var isSwiftAndHeaderFileGenerated = false
-
   override fun invoke(outputDirectory: File, dictionary: Dictionary) {
+    if (dictionary.isEmpty())
+      return
+
+    val values = dictionary.values.first()
+    values.keys.generateSwiftAndHeaderFiles(outputDirectory)
+
     dictionary.forEach {
-      if (!isSwiftAndHeaderFileGenerated)
-        it.value.keys.generateSwiftAndHeaderFiles(outputDirectory)
       writeContent(content = it.value.encodeTranslation(), outputDirectory, outputFileName = localizationFileName(it.key))
     }
   }
@@ -43,7 +45,6 @@ class IosEncodeInteractor : EncodeInteractor() {
   private fun String.encodeCommentLine(): String = "// $this"
 
   private fun Set<String>.generateSwiftAndHeaderFiles(outputDirectory: File) {
-    isSwiftAndHeaderFileGenerated = true
     val headerContentBuilder = StringBuilder(IOS_DO_NOT_MODIFY_LINE)
     val swiftContentBuilder = StringBuilder(
       IOS_DO_NOT_MODIFY_LINE +
