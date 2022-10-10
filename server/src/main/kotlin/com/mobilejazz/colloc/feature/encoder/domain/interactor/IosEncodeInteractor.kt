@@ -51,7 +51,7 @@ class IosEncodeInteractor : EncodeInteractor() {
         "\n\npublic protocol LocalizedEnum: CustomStringConvertible {}" +
         "\n\nextension LocalizedEnum where Self: RawRepresentable, Self.RawValue == String {" +
         "\n\tpublic var description: String  {" +
-        "\n\t\tNSLocalizedString(self.rawValue, comment: \"\")" +
+        "\n\t\tNSLocalizedString(rawValue, comment: \"\")" +
         "\n\t}" +
         "\n}" +
         "\n\npublic enum Colloc: String, LocalizedEnum {"
