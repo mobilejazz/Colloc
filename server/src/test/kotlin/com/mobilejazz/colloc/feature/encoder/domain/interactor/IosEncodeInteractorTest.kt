@@ -1,8 +1,6 @@
 package com.mobilejazz.colloc.feature.encoder.domain.interactor
 
 import com.mobilejazz.colloc.domain.model.Language
-import com.mobilejazz.colloc.feature.encoder.domain.interactor.IosEncodeInteractor
-import com.mobilejazz.colloc.feature.encoder.domain.interactor.IOS_DO_NOT_MODIFY_LINE
 import com.mobilejazz.colloc.randomString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -49,7 +47,7 @@ internal class IosEncodeInteractorTest {
         "\n\npublic protocol LocalizedEnum: CustomStringConvertible {}" +
         "\n\nextension LocalizedEnum where Self: RawRepresentable, Self.RawValue == String {" +
         "\n\tpublic var description: String  {" +
-        "\n\t\tNSLocalizedString(self.rawValue, comment: \"\")" +
+        "\n\t\tNSLocalizedString(rawValue, comment: \"\")" +
         "\n\t}" +
         "\n}" +
         "\n\npublic enum Colloc: String, LocalizedEnum {" +
