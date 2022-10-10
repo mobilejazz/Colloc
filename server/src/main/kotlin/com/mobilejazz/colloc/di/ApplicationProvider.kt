@@ -10,6 +10,7 @@ import com.mobilejazz.colloc.feature.encoder.domain.interactor.AngularEncodeInte
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.EncodeInteractor
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.IosEncodeInteractor
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.JsonEncodeInteractor
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.angular.AngularEncoderV1Interactor
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -25,7 +26,7 @@ class ApplicationModule {
   fun provideCollocInteractor(
     downloadFileInteractor: DownloadFileInteractor,
     localizationDecoder: LocalizationDecoder,
-    platformCollocInteractorMap: Map<Platform, EncodeInteractor>
+    platformCollocInteractorMap: Map<Platform, Map<Int, EncodeInteractor>>
   ) =
     CollocInteractor(
       downloadFileInteractor,
@@ -49,10 +50,13 @@ class ApplicationModule {
 
   @Bean
   fun providePlatformEncodeInteractorMap(json: Json) = mapOf(
-    Platform.ANDROID to AndroidEncodeInteractor(),
-    Platform.IOS to IosEncodeInteractor(),
-    Platform.ANGULAR to AngularEncodeInteractor(json),
-    Platform.JSON to JsonEncodeInteractor(json)
+    Platform.ANDROID to mapOf(1 to AndroidEncodeInteractor()),
+    Platform.IOS to mapOf(1 to IosEncodeInteractor()),
+    Platform.ANGULAR to mapOf(
+      1 to AngularEncoderV1Interactor(json),
+      2 to AngularEncodeInteractor(json)
+    ),
+    Platform.JSON to mapOf(1 to JsonEncodeInteractor(json))
   )
 
   @Bean

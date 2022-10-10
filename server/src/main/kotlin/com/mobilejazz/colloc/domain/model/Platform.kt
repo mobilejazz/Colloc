@@ -4,5 +4,5 @@ enum class Platform {
   IOS,
   ANDROID,
   JSON,
-  ANGULAR,
+  ANGULAR
 }
