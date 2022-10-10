@@ -32,23 +32,13 @@ class AngularEncodeInteractor(private val json: Json) : EncodeInteractor() {
     val map = mutableMapOf<String, Any>()
 
     forEach { translation ->
-      if (translation.key.isComment())
-        translation.key.encodeCommentLine(map)
-      else
+      if (!translation.key.isComment())
         translation.encodeTranslationLine(map)
     }
 
     return map.mapValues {
       it.value.toJsonElement()
     }
-  }
-
-  private fun String.encodeCommentLine(map: MutableMap<String, Any>) {
-    val comment =
-      substring(1) // Remove leading "#" from comment
-        .trim()
-        .uppercase()
-    map[comment] = comment
   }
 
   private fun Map.Entry<String, String>.encodeTranslationLine(map: MutableMap<String, Any>) {
