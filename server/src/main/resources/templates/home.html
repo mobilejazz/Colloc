@@ -19,10 +19,11 @@
 <div class="container mt-5">
     <div class="row">
         <form action="/colloc" target="_blank" method="get">
+            <input type="hidden" id="version" name="version" value="1">
             <div class="col">
                 <div class="mb-3">
-                    <label class="form-label" for="id">Google Drive ID document</label>
-                    <input class="form-control" aria-describedby="GoogleIdBlock" type="text" id="id" name="id" required>
+                    <label class="form-label" for="google-id">Google Drive ID document</label>
+                    <input class="form-control" aria-describedby="GoogleIdBlock" type="text" id="google-id" name="id" required>
                     <div id="GoogleIdBlock" class="form-text">
                         Copy the ID from the URL of a Google Spreadsheet Colloc Format. Ex. https://docs.google.com/a/organization/spreadsheets/d/*ID*
                     </div>
@@ -30,14 +31,16 @@
             </div>
             <div class="col mt-3">
                 <div class="btn-group-vertical" role="group" aria-label="Select Platform">
-                    <input class="btn-check" type="radio" id="radio_android" name="platform" value="ANDROID" autocomplete="off" required>
+                    <input class="btn-check" type="radio" id="radio_android" name="platform" value="ANDROID" data-version="1" autocomplete="off" required>
                     <label class="btn btn-outline-secondary" for="radio_android">ANDROID</label>
-                    <input class="btn-check" type="radio" id="radio_ios" name="platform" value="IOS" autocomplete="off" required>
+                    <input class="btn-check" type="radio" id="radio_ios" name="platform" value="IOS" data-version="1" autocomplete="off" required>
                     <label class="btn btn-outline-secondary" for="radio_ios">IOS</label>
-                    <input class="btn-check" type="radio" id="radio_json" name="platform" value="JSON" autocomplete="off" required>
+                    <input class="btn-check" type="radio" id="radio_json" name="platform" value="JSON" data-version="1" autocomplete="off" required>
                     <label class="btn btn-outline-secondary" for="radio_json">JSON</label>
-                    <input class="btn-check" type="radio" id="radio_angular" name="platform" value="ANGULAR" autocomplete="off" required>
-                    <label class="btn btn-outline-secondary" for="radio_angular">ANGULAR</label>
+                    <input class="btn-check" type="radio" id="radio_angular_v2" name="platform" value="ANGULAR" data-version="2" autocomplete="off" required>
+                    <label class="btn btn-outline-secondary" for="radio_angular_v2">ANGULAR</label>
+                    <input class="btn-check" type="radio" id="radio_angular_v1" name="platform" value="ANGULAR" data-version="1" autocomplete="off" required>
+                    <label class="btn btn-outline-secondary" for="radio_angular_v1">ANGULAR (deprecated)</label>
                 </div>
             </div>
             <div class="col mt-3">
@@ -61,5 +64,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
+<script>
+    const versionElement = document.getElementById("version")
+    document.querySelectorAll("input[type=radio]").forEach((element) => {
+            console.log(element)
+            element.addEventListener('change', function () {
+                versionElement.value = this.dataset.version
+            });
+        }
+    )
+</script>
 </body>
 </html>

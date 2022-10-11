@@ -13,17 +13,17 @@ import java.util.UUID
 class CollocInteractor(
   private val downloadFileInteractor: DownloadFileInteractor,
   private val localizationDecoder: LocalizationDecoder,
-  private val platformEncodeInteractorMap: Map<Platform, EncodeInteractor>
+  private val platformEncodeInteractorMap: Map<Platform, Map<Int, EncodeInteractor>>
 ) {
   sealed class Error {
     class InvalidIdException(reason: String) : Exception(reason)
   }
 
-  suspend operator fun invoke(id: String, platform: Platform): File {
+  suspend operator fun invoke(id: String, version: Int, platform: Platform): File {
     if (id.isBlank()) throw Error.InvalidIdException("No ID provided")
 
     val tempFolder = File("/tmp/" + UUID.randomUUID().toString())
-    platform.generateLocales(id, tempFolder)
+    platform.generateLocales(id, version, tempFolder)
 
     val zip = compressFolder(tempFolder)
     tempFolder.deleteRecursively()
@@ -31,10 +31,13 @@ class CollocInteractor(
     return zip
   }
 
-  private suspend fun Platform.generateLocales(id: String, outputDirectory: File) {
+  private suspend fun Platform.generateLocales(id: String, version: Int, outputDirectory: File) {
     val csvFile = downloadCsv(id.toFullImportedFileURL())
     val dictionary = localizationDecoder.decode(csvFile.absolutePath)
-    platformEncodeInteractorMap.getValue(this)(outputDirectory, dictionary)
+    val encoder = platformEncodeInteractorMap[this]?.getValue(version)
+    encoder?.let {
+      it(outputDirectory, dictionary)
+    }
   }
 
   private suspend fun downloadCsv(link: URL): File = downloadFileInteractor(
