@@ -1,0 +1,48 @@
+[versions]
+kotlin-version = "1.6.21"
+ktor = "2.1.0"
+org-springframework-boot = "2.7.0"
+kotlinx-coroutines = "1.6.4"
+kotlinx-serialization = "1.4.0"
+jetbrains-annotations = "13.0"
+kotlin-scripting-compiler-embeddable = "1.6.21"
+log4j = "2.17.1"
+mockk = "1.12.8"
+spring-dependency-management = "1.0.11.RELEASE"
+manes = "0.41.0"
+littlerobots = "0.6.1"
+
+[libraries]
+opencsv = "com.opencsv:opencsv:5.6"
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+log4j-core = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4j" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
+kotlin-allopen = { module = "org.jetbrains.kotlin:kotlin-allopen", version.ref = "kotlin-version" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-version" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin-version" }
+kotlin-scripting-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable", version.ref = "kotlin-version" }
+kotlin-stdlib-common = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", version.ref = "kotlin-version" }
+kotlin-stdlib-jdk7 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin-version" }
+kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-version" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor", version.ref = "kotlinx-coroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor", version.ref = "org-springframework-boot" }
+spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "org-springframework-boot" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator", version.ref = "org-springframework-boot" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "org-springframework-boot" }
+spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf", version.ref = "org-springframework-boot" }
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "org-springframework-boot" }
+
+[plugins]
+manes = { id = "com.github.ben-manes.versions", version.ref = "manes"}
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+littlerobots = { id = "nl.littlerobots.version-catalog-update", version.ref = "littlerobots"}
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }
+kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin-version" }
+springframework-boot = { id = "org.springframework.boot", version.ref = "org-springframework-boot" }
+kotlin-allopen = { id = "kotlin-allopen", version.ref = "kotlin-version" }
+kotlin-spring = { id = "kotlin-spring", version.ref = "kotlin-version" }
+kotlin-plugin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin-version" }
