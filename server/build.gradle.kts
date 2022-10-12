@@ -1,10 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-  id("org.springframework.boot") version "2.7.0"
-  id("io.spring.dependency-management") version "1.0.11.RELEASE"
-  kotlin("jvm") version "1.6.21"
-  kotlin("plugin.spring") version "1.6.21"
+  alias(libs.plugins.springframework.boot)
+  alias(libs.plugins.spring.dependency.management)
+  kotlin("jvm")  version libs.versions.kotlin.version
+  kotlin("plugin.spring")  version libs.versions.kotlin.version
+  alias(libs.plugins.manes)
+  alias(libs.plugins.littlerobots)
 }
 
 group = "com.mobilejazz"
@@ -15,30 +18,29 @@ repositories {
   mavenCentral()
 }
 
-val ktorVersion = "2.1.0"
 
 dependencies {
   //	Spring Boot
-  implementation("org.springframework.boot:spring-boot-starter-web")
-  implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-  implementation("org.springframework.boot:spring-boot-devtools")
-  implementation("org.springframework.boot:spring-boot-configuration-processor")
-  implementation("org.springframework.boot:spring-boot-starter-actuator")
+  implementation(libs.spring.boot.starter.web)
+  implementation(libs.spring.boot.starter.thymeleaf)
+  implementation(libs.spring.boot.starter.actuator)
+  implementation(libs.spring.boot.devtools)
+  implementation(libs.spring.boot.configuration.processor)
 
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+  implementation(libs.kotlin.reflect)
+  implementation(libs.kotlin.stdlib.jdk8)
 
-  implementation("io.ktor:ktor-client-core:$ktorVersion")
-  implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+  implementation(libs.ktor.client.core)
+  implementation(libs.ktor.client.okhttp)
 
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.4")
-  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
+  implementation(libs.kotlinx.coroutines.core)
+  implementation(libs.kotlinx.coroutines.reactor)
+  implementation(libs.kotlinx.serialization.json)
 
-  implementation("com.opencsv:opencsv:5.6")
+  implementation(libs.opencsv)
 
-  testImplementation("org.springframework.boot:spring-boot-starter-test")
-  testImplementation("io.mockk:mockk:1.12.8")
+  testImplementation(libs.spring.boot.starter.test)
+  testImplementation(libs.mockk)
 }
 
 tasks.withType<KotlinCompile> {
@@ -55,3 +57,32 @@ tasks.withType<Test> {
 springBoot {
   mainClass.set("com.mobilejazz.colloc.CollocApplicationKt")
 }
+
+//region version-catalog update configuration
+fun isNonStable(version: String): Boolean {
+  val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+  val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+  val isStable = stableKeyword || regex.matches(version)
+  return isStable.not()
+}
+
+// https://github.com/ben-manes/gradle-versions-plugin
+tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
+  rejectVersionIf {
+    isNonStable(candidate.version) && !isNonStable(currentVersion)
+  }
+}
+
+versionCatalogUpdate {
+  // sort the catalog by key (default is true)
+  sortByKey.set(false)
+  keep {
+    // keep versions without any library or plugin reference
+    keepUnusedVersions.set(true)
+    // keep all libraries that aren't used in the project
+    keepUnusedLibraries.set(false)
+    // keep all plugins that aren't used in the project
+    keepUnusedPlugins.set(false)
+  }
+}
+//endregion version-catalog update configuration

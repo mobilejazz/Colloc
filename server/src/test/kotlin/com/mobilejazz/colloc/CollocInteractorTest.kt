@@ -6,7 +6,9 @@ import com.mobilejazz.colloc.domain.model.Platform
 import com.mobilejazz.colloc.feature.decoder.CsvLocalizationDecoder
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.AndroidEncodeInteractor
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.AngularEncodeInteractor
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.IosEncodeInteractor
 import com.mobilejazz.colloc.feature.encoder.domain.interactor.JsonEncodeInteractor
+import com.mobilejazz.colloc.feature.encoder.domain.interactor.angular.AngularEncoderV1Interactor
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -22,7 +24,7 @@ class CollocInteractorTest {
     runBlocking {
       val platform = Platform.values().random()
       assertThrows<CollocInteractor.Error.InvalidIdException> {
-        getInteractor()("", platform)
+        getInteractor()("", 1, platform)
       }
     }
   }
@@ -32,16 +34,19 @@ class CollocInteractorTest {
     runBlocking {
       val platform = Platform.values().random()
       val id = "1FYWbBhV_dtlSVOTrhdO2Bd6e6gMhZ5_1iklL-QrkM2o"
-      val result = getInteractor()(id, platform)
+      val result = getInteractor()(id, 1, platform)
       assert(result.length() > 0)
     }
   }
 
   private fun provideLocalizationEncodetMap() = mapOf(
-    Platform.ANDROID to AndroidEncodeInteractor(),
-    Platform.IOS to AndroidEncodeInteractor(),
-    Platform.ANGULAR to AngularEncodeInteractor(Json { }),
-    Platform.JSON to JsonEncodeInteractor(Json { })
+    Platform.ANDROID to mapOf(1 to AndroidEncodeInteractor()),
+    Platform.IOS to mapOf(1 to IosEncodeInteractor()),
+    Platform.ANGULAR to mapOf(
+      1 to AngularEncoderV1Interactor(Json {}),
+      2 to AngularEncodeInteractor(Json {})
+    ),
+    Platform.JSON to mapOf(1 to JsonEncodeInteractor(Json {}))
   )
 
   private val httpClient =
