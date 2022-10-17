@@ -19,5 +19,5 @@ class AngularEncoderV1Interactor(private val json: Json) : EncodeInteractor() {
     }
   }
 
-  private fun localizationFileName(language: Language): String = "angular/${language.name}.json"
+  private fun localizationFileName(language: Language): String = "angular/${language.code}.json"
 }
