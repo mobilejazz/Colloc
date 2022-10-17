@@ -58,6 +58,11 @@ springBoot {
   mainClass.set("com.mobilejazz.colloc.CollocApplicationKt")
 }
 
+// disable a new configuration in spring boot which generate multiple jar files
+tasks.named<Jar>("jar") {
+  enabled = false
+}
+
 //region version-catalog update configuration
 fun isNonStable(version: String): Boolean {
   val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
