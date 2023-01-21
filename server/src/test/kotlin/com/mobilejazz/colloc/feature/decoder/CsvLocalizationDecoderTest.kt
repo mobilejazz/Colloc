@@ -10,7 +10,7 @@ import java.io.File
 internal class CsvLocalizationDecoderTest {
 
   @TempDir
-  private val testDir: File = File("src/test/resources/csv_parser/")
+  private var testDir: File = File("src/test/resources/csv_parser/")
 
   val csvContent =
     "                      ,#        ,English ,#          ,Spanish   \n" +
