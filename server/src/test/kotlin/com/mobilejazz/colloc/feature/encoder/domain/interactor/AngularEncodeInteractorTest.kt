@@ -17,7 +17,7 @@ import java.io.File
 internal class AngularEncodeInteractorTest {
 
   @TempDir
-  private val localizationDirectory: File = File("{src/test/resources}/encode_localization/")
+  private var localizationDirectory: File = File("{src/test/resources}/encode_localization/")
 
   @MockK
   private lateinit var json: Json

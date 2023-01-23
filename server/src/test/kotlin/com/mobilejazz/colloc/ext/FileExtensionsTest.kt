@@ -11,7 +11,7 @@ import java.io.File
 class CollocApplicationTests {
 
   @TempDir
-  private val testDir: File = File("src/test/resources/file_utils/")
+  private var testDir: File = File("src/test/resources/file_utils/")
 
   @Test
   fun `test if file is generated`() {

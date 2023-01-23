@@ -14,7 +14,7 @@ import java.net.URL
 class DownloadFileInteractorTest {
 
   @TempDir
-  private val testDir: File = File("src/test/resources/download_file/")
+  private var testDir: File = File("src/test/resources/download_file/")
 
   @Test
   fun `correct link generates a file`() {

@@ -14,7 +14,7 @@ import java.io.File
 internal class JsonEncodeInteractorTest {
 
   @TempDir
-  private val localizationDirectory: File = File("{src/test/resources}/encode_localization/")
+  private var localizationDirectory: File = File("{src/test/resources}/encode_localization/")
 
   @Test
   fun `assert correct content is generated`() {
